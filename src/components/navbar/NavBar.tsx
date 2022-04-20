@@ -20,8 +20,8 @@ function NavBar() {
     user !== null ? Setuserdata(user) : Setuserdata(null);
   });
   return (
-    <div className=" w-full fixed top-0">
-      <div className="my-4  px-4 py-6 rounded-md flex justify-between items-center bg-white mx-auto container nav">
+    <div className=" w-full py-4 sticky top-0">
+      <div className="  px-4 py-6 rounded-md flex justify-between items-center bg-white mx-auto container nav">
         <div>CVSpace</div>
         <div>
           {userData && (

@@ -6,7 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 function Layout({ children }: any) {
   return (
-    <div>
+    <div className="w-full min-h-screen Home">
       <NavBar />
       {children}
       <ToastContainer />

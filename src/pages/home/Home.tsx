@@ -8,13 +8,16 @@ import {
 import { auth } from "../../firebase/firebase";
 import { toast } from "react-toastify";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 function Home() {
+  const navigation = useNavigate();
   const [userData, Setuserdata] = useState<any>(null);
   const provider = new GoogleAuthProvider();
   const loginWithpopup = () => {
     signInWithPopup(auth, provider)
       .then((result) => {
         toast.success("Login success");
+        navigation("/editor");
       })
       .catch((error) => {
         toast.error(error.message);
@@ -24,8 +27,8 @@ function Home() {
     user !== null ? Setuserdata(user) : Setuserdata(null);
   });
   return (
-    <div className="min-h-screen w-full Home py-20">
-      <div className="h-40" />
+    <div className="min-h-screen w-full py-20">
+      <div className="h-10" />
       <div className="container mx-auto">
         <div className="text-center text-8xl font-bold">
           The easiest way to create a
@@ -36,7 +39,10 @@ function Home() {
         </div>
         <div className="text-center mt-12">
           {userData !== null ? (
-            <button className="bg-[#2cd9ff] px-6 py-3 font-semibold rounded-lg">
+            <button
+              className="bg-[#2cd9ff] px-6 py-3 font-semibold rounded-lg"
+              onClick={() => navigation("/editor")}
+            >
               Open Editor
             </button>
           ) : (
