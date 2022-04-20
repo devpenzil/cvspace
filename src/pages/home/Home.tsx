@@ -1,6 +1,28 @@
 import "./Home.scss";
 import ss from "../../assets/screenshot.png";
+import {
+  signInWithPopup,
+  GoogleAuthProvider,
+  onAuthStateChanged,
+} from "firebase/auth";
+import { auth } from "../../firebase/firebase";
+import { toast } from "react-toastify";
+import { useState } from "react";
 function Home() {
+  const [userData, Setuserdata] = useState<any>(null);
+  const provider = new GoogleAuthProvider();
+  const loginWithpopup = () => {
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        toast.success("Login success");
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
+  };
+  onAuthStateChanged(auth, (user) => {
+    user !== null ? Setuserdata(user) : Setuserdata(null);
+  });
   return (
     <div className="min-h-screen w-full Home py-20">
       <div className="h-40" />
@@ -13,9 +35,18 @@ function Home() {
           Our simple editor allows you to create beutifull resume in minutes.
         </div>
         <div className="text-center mt-12">
-          <button className="bg-[#2cd9ff] px-6 py-3 font-semibold rounded-lg">
-            create for Free
-          </button>
+          {userData !== null ? (
+            <button className="bg-[#2cd9ff] px-6 py-3 font-semibold rounded-lg">
+              Open Editor
+            </button>
+          ) : (
+            <button
+              className="bg-[#2cd9ff] px-6 py-3 font-semibold rounded-lg"
+              onClick={loginWithpopup}
+            >
+              Start with Google
+            </button>
+          )}
         </div>
         <div className="mt-20 px-20">
           <img src={ss} alt="" />
