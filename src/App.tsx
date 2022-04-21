@@ -9,8 +9,7 @@ function App() {
       <Layout>
         <Routes>
           <Route element={<Home />} path="/" />
-          <Route element={<Editor />} path="/editor" />
-          <Route element={<Home />} path="*" />
+          <Route element={<Editor />} path="/editor/*" />
         </Routes>
       </Layout>
     </>

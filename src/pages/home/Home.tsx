@@ -8,7 +8,7 @@ import {
 import { auth } from "../../firebase/firebase";
 import { toast } from "react-toastify";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 function Home() {
   const navigation = useNavigate();
   const [userData, Setuserdata] = useState<any>(null);
@@ -39,12 +39,8 @@ function Home() {
         </div>
         <div className="text-center mt-12">
           {userData !== null ? (
-            <button
-              className="bg-[#2cd9ff] px-6 py-3 font-semibold rounded-lg"
-              onClick={() => navigation("/editor")}
-            >
-              Open Editor
-            </button>
+            <Link to={"/editor"}>
+            Open Editor</Link>
           ) : (
             <button
               className="bg-[#2cd9ff] px-6 py-3 font-semibold rounded-lg"

@@ -1,11 +1,13 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Navbar.scss";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../../firebase/firebase";
 import { toast } from "react-toastify";
+import { useLocation } from "react-router-dom";
 
 function NavBar() {
+  const location = useLocation();
   const [userData, Setuserdata] = useState<any>(null);
   const signout = () => {
     signOut(auth)
@@ -16,12 +18,17 @@ function NavBar() {
         console.log("error", error);
       });
   };
-  onAuthStateChanged(auth, (user) => {
-    user !== null ? Setuserdata(user) : Setuserdata(null);
-  });
+  useEffect(()=>{
+    onAuthStateChanged(auth, (user) => {
+      user !== null ? Setuserdata(user) : Setuserdata(null);
+    });
+  },[])
+
   return (
-    <div className=" w-full py-4 sticky top-0">
-      <div className="  px-4 py-6 rounded-md flex justify-between items-center bg-white mx-auto container nav">
+    <div
+      className={"w-full py-4 top-0 " + (location.pathname === "/" && "sticky")}
+    >
+      <div className="  px-4 py-3 rounded-md flex justify-between items-center bg-white mx-auto container nav">
         <div>CVSpace</div>
         <div>
           {userData && (
