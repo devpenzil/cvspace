@@ -14,6 +14,7 @@ function NavBar() {
     signOut(auth)
       .then(() => {
         toast.success("Logged out");
+        navigate("/");
       })
       .catch((error) => {
         console.log("error", error);
@@ -31,14 +32,14 @@ function NavBar() {
     >
       <div className="  px-4 py-3 rounded-md flex justify-between items-center bg-white mx-auto container nav">
         <div>
-          <span
-            className="cursor-pointer"
+          <button
+            className="btn btn-ghost"
             onClick={() => {
               navigate("/");
             }}
           >
             CVSpace
-          </span>
+          </button>
         </div>
         <div>
           {userData && (

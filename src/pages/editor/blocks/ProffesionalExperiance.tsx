@@ -7,7 +7,7 @@ import AppInput from "../../../components/appinput/AppInput";
 import AppTextArea from "../../../components/apptextarea/AppTextArea";
 import ElementHeader from "../../../components/elementheader/ElementHeader";
 
-function EducationQualification() {
+function ProffesionalExperaince() {
   const [qdata, Setqdata] = useState({
     showinprint: true,
     qualifications: [1, 2, 3],
@@ -15,19 +15,19 @@ function EducationQualification() {
   return (
     <div className="container mx-auto">
       <ElementHeader
-        title="Educational Qualification"
+        title="Proffessional Experiance"
         triggerchange={() => {}}
       />
       <div className="w-full flex justify-around">
         <div className="w-1/3 pt-6 ">
           <AppInput
-            label="Programmme Name"
+            label="Comapny Name"
             triggerchange={() => {}}
             loading={false}
             value=""
           />
           <AppInput
-            label="Institution Name"
+            label="Role"
             triggerchange={() => {}}
             loading={false}
             value=""
@@ -48,7 +48,7 @@ function EducationQualification() {
               <div className="py-3">
                 <div className="card w-full bg-base-100 shadow-xl">
                   <div className="card-body">
-                    <h2 className="card-title">B.com with CA</h2>
+                    <h2 className="card-title">Front End Developer</h2>
                     <div>12/05/2002 - 13/05/2006</div>
                     <p>
                       Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -73,4 +73,4 @@ function EducationQualification() {
   );
 }
 
-export default EducationQualification;
+export default ProffesionalExperaince;

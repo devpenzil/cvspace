@@ -39,8 +39,12 @@ function Home() {
         </div>
         <div className="text-center mt-12">
           {userData !== null ? (
-            <Link to={"/editor"}>
-            Open Editor</Link>
+            <Link
+              to={"/editor"}
+              className="bg-[#2cd9ff] px-6 py-3 font-semibold rounded-lg"
+            >
+              Open Editor
+            </Link>
           ) : (
             <button
               className="bg-[#2cd9ff] px-6 py-3 font-semibold rounded-lg"

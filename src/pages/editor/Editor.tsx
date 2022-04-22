@@ -10,6 +10,9 @@ import UserIcon from "../../assets/icons/UserIcon";
 import BookIcon from "../../assets/icons/BookIcon";
 import CaseIcon from "../../assets/icons/CaseIcon";
 import FileIcon from "../../assets/icons/FileIcon";
+import SettingsIcon from "../../assets/icons/SettingsIcon";
+import CertificateIcon from "../../assets/icons/CertificateIcon";
+import ProffesionalExperaince from "./blocks/ProffesionalExperiance";
 
 function Editor() {
   const navigate = useNavigate();
@@ -31,9 +34,21 @@ function Editor() {
     },
     {
       name: "Proffesional Experiance",
+      active: location.pathname === "/editor/proffessional-experiance",
+      route: "/editor/proffessional-experiance",
+      icon: <CaseIcon />,
+    },
+    {
+      name: "Certification",
       active: false,
       route: "/editor/education-qualification",
-      icon: <CaseIcon />,
+      icon: <CertificateIcon />,
+    },
+    {
+      name: "Skills & Language",
+      active: false,
+      route: "/editor/education-qualification",
+      icon: <SettingsIcon />,
     },
     {
       name: "Declaration",
@@ -56,6 +71,8 @@ function Editor() {
                   "Personal Info"}
                 {location.pathname === "/editor/education-qualification" &&
                   "Education Qualification"}
+                {location.pathname === "/editor/proffessional-experiance" &&
+                  "Proffessional Experiance"}
                 {location.pathname === "/editor" && "Personal Info"}
               </li>
             </ul>
@@ -97,6 +114,10 @@ function Editor() {
               <Route
                 path="education-qualification"
                 element={<EducationQualification />}
+              />
+              <Route
+                path="proffessional-experiance"
+                element={<ProffesionalExperaince />}
               />
             </Routes>
           </div>
