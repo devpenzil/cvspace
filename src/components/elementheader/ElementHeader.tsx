@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 interface props {
   title: string;
+  triggerchange: (e: boolean) => void;
 }
-function ElementHeader({ title }: props) {
+function ElementHeader({ title, triggerchange }: props) {
+  const [isChecked, SetIsChecked] = useState(true);
   return (
     <div
       className="text-2xl font-bold flex items-center space-x-3 tooltip w-fit"
@@ -13,7 +15,11 @@ function ElementHeader({ title }: props) {
       <input
         type="checkbox"
         className="toggle toggle-sm"
-        defaultChecked={true}
+        checked={isChecked}
+        onChange={() => {
+          triggerchange(isChecked);
+          SetIsChecked(!isChecked);
+        }}
       />
     </div>
   );

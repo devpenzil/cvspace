@@ -7,7 +7,7 @@ import ElementHeader from "../../../components/elementheader/ElementHeader";
 function EducationQualification() {
   return (
     <div className="container mx-auto">
-      <ElementHeader title="Educational Qualification" />
+      {/* <ElementHeader title="Educational Qualification" /> */}
       <div className="w-full flex justify-around">
         <div className="w-1/3 pt-6 ">
           <div>
@@ -21,14 +21,14 @@ function EducationQualification() {
               </div>
             </div>
           </div>
-          <AppInput label="Name" />
+          {/* <AppInput label="Name" />
           <AppInput label="Email" />
           <AppInput label="Phone" />
-          <AppInput label="Website" />
+          <AppInput label="Website" /> */}
         </div>
         <div className="w-1/3">
-          <AppInput label="Job Title" />
-          <AppTextArea />
+          {/* <AppInput label="Job Title" /> */}
+          {/* <AppTextArea /> */}
           <AppBtn label="Save" />
         </div>
       </div>

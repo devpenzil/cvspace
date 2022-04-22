@@ -2,8 +2,11 @@ import React from "react";
 interface props {
   disabled?: boolean;
   label?: string;
+  triggerchange: (e?: string) => void;
+  value: any;
+  loading: boolean;
 }
-function AppInput({ disabled, label }: props) {
+function AppInput({ disabled, label, triggerchange, value, loading }: props) {
   return (
     <div className="py-3">
       <div className="form-control w-full">
@@ -15,6 +18,11 @@ function AppInput({ disabled, label }: props) {
           placeholder="Type here"
           className="input input-bordered w-full "
           disabled={disabled}
+          onChange={(e) => {
+            triggerchange(e.target.value);
+          }}
+          value={value}
+          readOnly={loading}
         />
       </div>
     </div>

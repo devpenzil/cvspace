@@ -6,11 +6,16 @@ import EducationQualification from "./blocks/EducationQualification";
 import PersonalInfo from "./blocks/PersonalInfo";
 import { useNavigate, useLocation } from "react-router-dom";
 import { auth } from "../../firebase/firebase";
+import { onAuthStateChanged } from "firebase/auth";
+import { useState } from "react";
 
 function Editor() {
   const navigate = useNavigate();
   const location = useLocation();
-
+  const [user, SetUser] = useState<any>();
+  onAuthStateChanged(auth, (user) => {
+    user !== null ? SetUser(user.uid) : SetUser(null);
+  });
   const routes = [
     {
       name: "Personal Info",
@@ -71,10 +76,7 @@ function Editor() {
           </div>
           <div className=" w-full px-8">
             <Routes>
-              <Route
-                path=""
-                element={<PersonalInfo uid={auth.currentUser?.uid} />}
-              />
+              <Route path="" element={<PersonalInfo uid={user} />} />
               <Route
                 path="personal-info"
                 element={<PersonalInfo uid={auth.currentUser?.uid} />}
