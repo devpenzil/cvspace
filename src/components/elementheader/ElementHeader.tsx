@@ -2,8 +2,9 @@ import React, { useState } from "react";
 interface props {
   title: string;
   triggerchange: (e: boolean) => void;
+  value?: boolean;
 }
-function ElementHeader({ title, triggerchange }: props) {
+function ElementHeader({ title, triggerchange, value }: props) {
   const [isChecked, SetIsChecked] = useState(true);
   return (
     <div
@@ -15,7 +16,7 @@ function ElementHeader({ title, triggerchange }: props) {
       <input
         type="checkbox"
         className="toggle toggle-sm"
-        checked={isChecked}
+        checked={value}
         onChange={() => {
           triggerchange(isChecked);
           SetIsChecked(!isChecked);

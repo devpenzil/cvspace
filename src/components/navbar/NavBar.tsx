@@ -4,10 +4,11 @@ import "./Navbar.scss";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../../firebase/firebase";
 import { toast } from "react-toastify";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function NavBar() {
   const location = useLocation();
+  const navigate = useNavigate();
   const [userData, Setuserdata] = useState<any>(null);
   const signout = () => {
     signOut(auth)
@@ -18,18 +19,27 @@ function NavBar() {
         console.log("error", error);
       });
   };
-  useEffect(()=>{
+  useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       user !== null ? Setuserdata(user) : Setuserdata(null);
     });
-  },[])
+  }, []);
 
   return (
     <div
       className={"w-full py-4 top-0 " + (location.pathname === "/" && "sticky")}
     >
       <div className="  px-4 py-3 rounded-md flex justify-between items-center bg-white mx-auto container nav">
-        <div>CVSpace</div>
+        <div>
+          <span
+            className="cursor-pointer"
+            onClick={() => {
+              navigate("/");
+            }}
+          >
+            CVSpace
+          </span>
+        </div>
         <div>
           {userData && (
             <>

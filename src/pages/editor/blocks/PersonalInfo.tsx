@@ -3,14 +3,14 @@ import AppBtn from "../../../components/appbtn/AppBtn";
 import AppInput from "../../../components/appinput/AppInput";
 import AppTextArea from "../../../components/apptextarea/AppTextArea";
 import ElementHeader from "../../../components/elementheader/ElementHeader";
-import { db, dbref } from "../../../firebase/firebase";
+import { auth, db, dbref } from "../../../firebase/firebase";
 import { child, get, set, ref } from "firebase/database";
 import { toast } from "react-toastify";
+import { onAuthStateChanged } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
-interface prop {
-  uid: string | undefined;
-}
-function PersonalInfo({ uid }: prop) {
+function PersonalInfo() {
+  const navigate = useNavigate();
   const [isLoading, SetisLoading] = useState(false);
   const [profiledata, SetProfileData] = useState<{
     name: string | null | undefined;
@@ -29,31 +29,37 @@ function PersonalInfo({ uid }: prop) {
     bio: "",
     showinPrint: true,
   });
+  const [userUid, SetuseUid] = useState<any>();
   useEffect(() => {
-    uid !== null &&
-      get(child(db, `users/${uid}/personal-info`))
-        .then((snapshot) => {
-          if (snapshot.exists()) {
-            SetProfileData({
-              ...profiledata,
-              name: snapshot.val().name,
-              email: snapshot.val().email,
-              phone: snapshot.val().phone,
-              jobtitle: snapshot.val().jobtitle,
-              website: snapshot.val().website,
-              bio: snapshot.val().bio,
-            });
-          } else {
-            console.log("No data available");
-          }
-        })
-        .catch((error) => {
-          toast.error("Something went wrong. Restart the App");
-        });
+    onAuthStateChanged(auth, (user) => {
+      SetuseUid(user?.uid);
+      user !== null
+        ? get(child(db, `users/${user.uid}/personal-info`))
+            .then((snapshot) => {
+              if (snapshot.exists()) {
+                SetProfileData({
+                  ...profiledata,
+                  name: snapshot.val().name,
+                  email: snapshot.val().email,
+                  phone: snapshot.val().phone,
+                  jobtitle: snapshot.val().jobtitle,
+                  website: snapshot.val().website,
+                  bio: snapshot.val().bio,
+                  showinPrint: snapshot.val().showinPrint,
+                });
+              } else {
+                console.log("no data");
+              }
+            })
+            .catch((error) => {
+              toast.error("Something went wrong. Restart the App");
+            })
+        : navigate("/");
+    });
   }, []);
   const updateFirebase = () => {
     SetisLoading(true);
-    set(ref(dbref, `users/${uid}/personal-info`), {
+    set(ref(dbref, `users/${userUid}/personal-info`), {
       name: profiledata.name,
       email: profiledata.email,
       phone: profiledata.phone,
@@ -74,6 +80,7 @@ function PersonalInfo({ uid }: prop) {
         triggerchange={(e) => {
           SetProfileData({ ...profiledata, showinPrint: !e });
         }}
+        value={profiledata.showinPrint}
       />
       <div className="w-full flex justify-around">
         <div className="w-1/2 lg:w-1/3 pt-6 ">
