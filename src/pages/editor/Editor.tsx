@@ -13,6 +13,9 @@ import FileIcon from "../../assets/icons/FileIcon";
 import SettingsIcon from "../../assets/icons/SettingsIcon";
 import CertificateIcon from "../../assets/icons/CertificateIcon";
 import ProffesionalExperaince from "./blocks/ProffesionalExperiance";
+import Certification from "./blocks/Certification";
+import SkillsLanguage from "./blocks/SkillsLanguage";
+import Declaration from "./blocks/Declaration";
 
 function Editor() {
   const navigate = useNavigate();
@@ -40,20 +43,20 @@ function Editor() {
     },
     {
       name: "Certification",
-      active: false,
-      route: "/editor/education-qualification",
+      active: location.pathname === "/editor/certification",
+      route: "/editor/certification",
       icon: <CertificateIcon />,
     },
     {
       name: "Skills & Language",
-      active: false,
-      route: "/editor/education-qualification",
+      active: location.pathname === "/editor/skills-and-langauge",
+      route: "/editor/skills-and-langauge",
       icon: <SettingsIcon />,
     },
     {
       name: "Declaration",
-      active: false,
-      route: "/editor/education-qualification",
+      active: location.pathname === "/editor/declaraion",
+      route: "/editor/declaraion",
       icon: <FileIcon />,
     },
   ];
@@ -119,6 +122,9 @@ function Editor() {
                 path="proffessional-experiance"
                 element={<ProffesionalExperaince />}
               />
+              <Route path="certification" element={<Certification />} />
+              <Route path="skills-and-langauge" element={<SkillsLanguage />} />
+              <Route path="declaraion" element={<Declaration />} />
             </Routes>
           </div>
         </div>

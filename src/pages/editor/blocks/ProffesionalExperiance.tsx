@@ -6,6 +6,7 @@ import AppDate from "../../../components/appdate/AppDate";
 import AppInput from "../../../components/appinput/AppInput";
 import AppTextArea from "../../../components/apptextarea/AppTextArea";
 import ElementHeader from "../../../components/elementheader/ElementHeader";
+import EmptyBlock from "../../../components/emptyblock/EmptyBlock";
 
 function ProffesionalExperaince() {
   const [qdata, Setqdata] = useState({
@@ -43,6 +44,7 @@ function ProffesionalExperaince() {
           <AppBtn label="Save" />
         </div>
         <div className="w-1/3">
+          {qdata.qualifications.length === 0 && <EmptyBlock />}
           {qdata.qualifications.map((obj, i) => {
             return (
               <div className="py-3">
