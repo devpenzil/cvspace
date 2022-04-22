@@ -56,7 +56,7 @@ function Editor() {
     {
       name: "Declaration",
       active: location.pathname === "/editor/declaraion",
-      route: "/editor/declaraion",
+      route: "/editor/declaration",
       icon: <FileIcon />,
     },
   ];
@@ -77,6 +77,11 @@ function Editor() {
                 {location.pathname === "/editor/proffessional-experiance" &&
                   "Proffessional Experiance"}
                 {location.pathname === "/editor" && "Personal Info"}
+                {location.pathname === "/editor/certification" &&
+                  "Certification"}
+                {location.pathname === "/editor/skills-and-langauge" &&
+                  "Skills and Language"}
+                {location.pathname === "/editor/declaration" && "Declaration"}
               </li>
             </ul>
           </div>
@@ -124,7 +129,7 @@ function Editor() {
               />
               <Route path="certification" element={<Certification />} />
               <Route path="skills-and-langauge" element={<SkillsLanguage />} />
-              <Route path="declaraion" element={<Declaration />} />
+              <Route path="declaration" element={<Declaration />} />
             </Routes>
           </div>
         </div>
