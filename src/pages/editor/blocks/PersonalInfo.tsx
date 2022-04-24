@@ -67,11 +67,16 @@ function PersonalInfo() {
       jobtitle: profiledata.jobtitle,
       bio: profiledata.bio,
       showinPrint: profiledata.showinPrint,
-    });
-    setTimeout(() => {
-      toast.success("Updated");
-      SetisLoading(false);
-    }, 2000);
+    })
+      .then(() => {
+        toast.success("Updated");
+        SetisLoading(false);
+      })
+      .catch((error) => {
+        toast.error("Something went wrong");
+        console.log(error);
+        SetisLoading(false);
+      });
   };
   return (
     <div className="container mx-auto">
