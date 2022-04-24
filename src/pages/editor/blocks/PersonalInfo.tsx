@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import AppBtn from "../../../components/appbtn/AppBtn";
 import AppInput from "../../../components/appinput/AppInput";
