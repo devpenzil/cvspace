@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState } from "react";
 import PenIcons from "../../../assets/icons/PenIcons";
 import TrashIcon from "../../../assets/icons/TrashIcon";

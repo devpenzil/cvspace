@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { onAuthStateChanged } from "firebase/auth";
 import { child, get, ref, set } from "firebase/database";
 import React, { useEffect, useState } from "react";
@@ -41,7 +42,7 @@ function Declaration() {
             })
         : navigate("/");
     });
-  });
+  }, []);
   const updateFirebase = () => {
     SetLoading(true);
     set(ref(dbref, `users/${useruid}/declaration`), {

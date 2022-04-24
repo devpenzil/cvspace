@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { onAuthStateChanged } from "firebase/auth";
 import { onValue, push, ref, set } from "firebase/database";
 import React, { useEffect, useState } from "react";
@@ -55,7 +56,7 @@ function Certification() {
           )
         : navigate("/");
     });
-  });
+  }, []);
   const addoneData = () => {
     SetisLoading(true);
     if (
