@@ -5,18 +5,28 @@ interface props {
   triggerchange: (e?: string) => void;
   value: any;
   loading: boolean;
+  mandatory?: boolean;
 }
-function AppInput({ disabled, label, triggerchange, value, loading }: props) {
+function AppInput({
+  disabled,
+  label,
+  triggerchange,
+  value,
+  loading,
+  mandatory,
+}: props) {
   return (
     <div className="py-3">
       <div className="form-control w-full">
         <label className="label">
-          <span className="label-text">{label}</span>
+          <span className="label-text">
+            {label} {mandatory && <span className="text-red-400">*</span>}
+          </span>
         </label>
         <input
           type="text"
           placeholder="Type here"
-          className="input input-bordered w-full "
+          className={"input input-bordered w-full "}
           disabled={disabled}
           onChange={(e) => {
             triggerchange(e.target.value);

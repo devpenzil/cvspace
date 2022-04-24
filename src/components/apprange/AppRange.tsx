@@ -9,7 +9,7 @@ function AppRange() {
           min={0}
           max={100}
           defaultValue={50}
-          className="range range-sm range-primary"
+          className="range range-xs range-primary"
           step={25}
         />
         <div className="w-full flex justify-between text-2xl px-2">

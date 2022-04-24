@@ -3,19 +3,38 @@ interface props {
   monthonly: boolean;
   label: string;
   presentcheck?: boolean;
+  value?: string;
+  triggerChange: (e?: any) => void;
+  mandatory?: boolean;
+  loading?: boolean;
 }
-function AppDate({ monthonly, label, presentcheck }: props) {
+function AppDate({
+  monthonly,
+  label,
+  presentcheck,
+  value,
+  triggerChange,
+  mandatory,
+  loading,
+}: props) {
   const [present, SetPresent] = useState(false);
   return (
     <div className="form-control w-full py-3 ">
       <label className="label">
-        <span className="label-text">{label}</span>
+        <span className="label-text">
+          {label} {mandatory && <span className="text-red-400">*</span>}
+        </span>
       </label>
       <input
         type={monthonly ? "month" : "date"}
         placeholder="Type here"
-        className="input input-bordered w-full "
+        className={"input input-bordered w-full "}
         disabled={present}
+        onChange={(e) => {
+          triggerChange(e.target.value);
+        }}
+        value={value}
+        readOnly={loading}
       />
       {presentcheck && (
         <div className="w-fit">

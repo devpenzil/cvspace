@@ -10,7 +10,7 @@ function Layout({ children }: any) {
       <div className="w-full min-h-screen Home hidden md:block">
         <NavBar />
         {children}
-        <ToastContainer />
+        <ToastContainer newestOnTop />
       </div>
       <div className="md:hidden">error</div>
     </>

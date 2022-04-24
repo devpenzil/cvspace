@@ -9,34 +9,22 @@ import AppTextArea from "../../../components/apptextarea/AppTextArea";
 import ElementHeader from "../../../components/elementheader/ElementHeader";
 import EmptyBlock from "../../../components/emptyblock/EmptyBlock";
 
-function SkillsLanguage() {
+function Skills() {
   const [qdata, Setqdata] = useState({
     showinprint: true,
     qualifications: [],
   });
   return (
     <div className="container mx-auto">
-      <ElementHeader title="Skills and Language" triggerchange={() => {}} />
+      <ElementHeader title="Skills" triggerchange={() => {}} />
       <div className="w-full flex justify-around">
         <div className="w-1/3 pt-6 ">
           <>
-            <div className="text-xl font-bold">Skills</div>
             <AppInput
               loading={false}
               triggerchange={() => {}}
               value=""
               label="Add your skill"
-            />
-            <AppRange />
-            <AppBtn label="Save" />
-          </>
-          <>
-            <div className="text-xl font-bold mt-12">Language</div>
-            <AppInput
-              loading={false}
-              triggerchange={() => {}}
-              value=""
-              label="Add a language"
             />
             <AppRange />
             <AppBtn label="Save" />
@@ -74,4 +62,4 @@ function SkillsLanguage() {
   );
 }
 
-export default SkillsLanguage;
+export default Skills;

@@ -33,8 +33,17 @@ function ProffesionalExperaince() {
             loading={false}
             value=""
           />
-          <AppDate monthonly={true} label={"Start Date"} />
-          <AppDate monthonly={true} label={"End Date"} presentcheck />
+          <AppDate
+            monthonly={true}
+            label={"Start Date"}
+            triggerChange={() => {}}
+          />
+          <AppDate
+            monthonly={true}
+            label={"End Date"}
+            presentcheck
+            triggerChange={() => {}}
+          />
           <AppTextArea
             label="Summary (if any)"
             loading={false}

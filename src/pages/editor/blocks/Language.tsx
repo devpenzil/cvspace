@@ -2,55 +2,31 @@ import React, { useState } from "react";
 import PenIcons from "../../../assets/icons/PenIcons";
 import TrashIcon from "../../../assets/icons/TrashIcon";
 import AppBtn from "../../../components/appbtn/AppBtn";
-import AppDate from "../../../components/appdate/AppDate";
 import AppInput from "../../../components/appinput/AppInput";
-import AppTextArea from "../../../components/apptextarea/AppTextArea";
+import AppRange from "../../../components/apprange/AppRange";
 import ElementHeader from "../../../components/elementheader/ElementHeader";
 import EmptyBlock from "../../../components/emptyblock/EmptyBlock";
 
-function EducationQualification() {
+function Language() {
   const [qdata, Setqdata] = useState({
     showinprint: true,
     qualifications: [],
   });
   return (
     <div className="container mx-auto">
-      <ElementHeader
-        title="Educational Qualification"
-        triggerchange={() => {}}
-      />
+      <ElementHeader title="Languages" triggerchange={() => {}} />
       <div className="w-full flex justify-around">
         <div className="w-1/3 pt-6 ">
-          <AppInput
-            label="Programmme Name"
-            triggerchange={() => {}}
-            loading={false}
-            value=""
-          />
-          <AppInput
-            label="Institution Name"
-            triggerchange={() => {}}
-            loading={false}
-            value=""
-          />
-          <AppDate
-            monthonly={true}
-            label={"Start Date"}
-            triggerChange={() => {}}
-          />
-          <AppDate
-            monthonly={true}
-            label={"End Date"}
-            presentcheck
-            triggerChange={() => {}}
-          />
-          <AppTextArea
-            label="Summary (if any)"
-            loading={false}
-            value=""
-            triggerchange={() => {}}
-          />
-          <AppBtn label="Save" />
+          <>
+            <AppInput
+              loading={false}
+              triggerchange={() => {}}
+              value=""
+              label="Add a language"
+            />
+            <AppRange />
+            <AppBtn label="Save" />
+          </>
         </div>
         <div className="w-1/3">
           {qdata.qualifications.length === 0 && <EmptyBlock />}
@@ -84,4 +60,4 @@ function EducationQualification() {
   );
 }
 
-export default EducationQualification;
+export default Language;

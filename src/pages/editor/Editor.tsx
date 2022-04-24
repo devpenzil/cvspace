@@ -14,8 +14,10 @@ import SettingsIcon from "../../assets/icons/SettingsIcon";
 import CertificateIcon from "../../assets/icons/CertificateIcon";
 import ProffesionalExperaince from "./blocks/ProffesionalExperiance";
 import Certification from "./blocks/Certification";
-import SkillsLanguage from "./blocks/SkillsLanguage";
+import Skills from "./blocks/Skills";
 import Declaration from "./blocks/Declaration";
+import Language from "./blocks/Language";
+import Speak from "../../assets/icons/Speak";
 
 function Editor() {
   const navigate = useNavigate();
@@ -48,10 +50,16 @@ function Editor() {
       icon: <CertificateIcon />,
     },
     {
-      name: "Skills & Language",
-      active: location.pathname === "/editor/skills-and-langauge",
-      route: "/editor/skills-and-langauge",
+      name: "Skills",
+      active: location.pathname === "/editor/skills",
+      route: "/editor/skills",
       icon: <SettingsIcon />,
+    },
+    {
+      name: "Language",
+      active: location.pathname === "/editor/language",
+      route: "/editor/language",
+      icon: <Speak />,
     },
     {
       name: "Declaration",
@@ -79,8 +87,8 @@ function Editor() {
                 {location.pathname === "/editor" && "Personal Info"}
                 {location.pathname === "/editor/certification" &&
                   "Certification"}
-                {location.pathname === "/editor/skills-and-langauge" &&
-                  "Skills and Language"}
+                {location.pathname === "/editor/skills" && "Skills"}
+                {location.pathname === "/editor/language" && "Languages"}
                 {location.pathname === "/editor/declaration" && "Declaration"}
               </li>
             </ul>
@@ -128,7 +136,8 @@ function Editor() {
                 element={<ProffesionalExperaince />}
               />
               <Route path="certification" element={<Certification />} />
-              <Route path="skills-and-langauge" element={<SkillsLanguage />} />
+              <Route path="skills" element={<Skills />} />
+              <Route path="language" element={<Language />} />
               <Route path="declaration" element={<Declaration />} />
             </Routes>
           </div>
