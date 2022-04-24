@@ -55,7 +55,7 @@ function Certification() {
           )
         : navigate("/");
     });
-  }, []);
+  });
   const addoneData = () => {
     SetisLoading(true);
     if (

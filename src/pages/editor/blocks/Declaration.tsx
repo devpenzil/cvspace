@@ -41,7 +41,7 @@ function Declaration() {
             })
         : navigate("/");
     });
-  }, []);
+  });
   const updateFirebase = () => {
     SetLoading(true);
     set(ref(dbref, `users/${useruid}/declaration`), {
