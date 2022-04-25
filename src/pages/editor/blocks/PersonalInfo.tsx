@@ -20,7 +20,6 @@ function PersonalInfo() {
     website: string | null | undefined;
     jobtitle: string | null | undefined;
     bio: string | null | undefined;
-    showinPrint: boolean;
   }>({
     name: "",
     email: "",
@@ -28,7 +27,6 @@ function PersonalInfo() {
     website: "",
     jobtitle: "",
     bio: "",
-    showinPrint: true,
   });
   const [userUid, SetuseUid] = useState<any>();
   useEffect(() => {
@@ -46,7 +44,6 @@ function PersonalInfo() {
                   jobtitle: snapshot.val().jobtitle,
                   website: snapshot.val().website,
                   bio: snapshot.val().bio,
-                  showinPrint: snapshot.val().showinPrint,
                 });
               } else {
                 console.log("no data");
@@ -67,7 +64,6 @@ function PersonalInfo() {
       website: profiledata.website,
       jobtitle: profiledata.jobtitle,
       bio: profiledata.bio,
-      showinPrint: profiledata.showinPrint,
     })
       .then(() => {
         toast.success("Updated");
@@ -81,13 +77,7 @@ function PersonalInfo() {
   };
   return (
     <div className="container mx-auto">
-      <ElementHeader
-        title="Personal Info"
-        triggerchange={(e) => {
-          SetProfileData({ ...profiledata, showinPrint: !e });
-        }}
-        value={profiledata.showinPrint}
-      />
+      <ElementHeader title="Personal Info" />
       <div className="w-full flex justify-around">
         <div className="w-1/2 lg:w-1/3 pt-6 ">
           <div>

@@ -16,10 +16,7 @@ function ProffesionalExperaince() {
   });
   return (
     <div className="container mx-auto">
-      <ElementHeader
-        title="Proffessional Experiance"
-        triggerchange={() => {}}
-      />
+      <ElementHeader title="Proffessional Experiance" />
       <div className="w-full flex justify-around">
         <div className="w-1/3 pt-6 ">
           <AppInput

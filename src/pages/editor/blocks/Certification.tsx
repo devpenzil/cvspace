@@ -13,6 +13,7 @@ import ElementHeader from "../../../components/elementheader/ElementHeader";
 import EmptyBlock from "../../../components/emptyblock/EmptyBlock";
 import { auth, dbref } from "../../../firebase/firebase";
 import { useNavigate } from "react-router-dom";
+import { singleCertificate } from "../../../types/editorTypes";
 
 function Certification() {
   const navigate = useNavigate();
@@ -22,12 +23,7 @@ function Certification() {
     showinprint: true,
     certificates: [],
   });
-  const [singleCert, SetsingleCert] = useState<{
-    name: string | undefined | null;
-    institute: string | undefined | null;
-    dateawarded: string | undefined;
-    summary: string | undefined | null;
-  }>({
+  const [singleCert, SetsingleCert] = useState<singleCertificate>({
     name: "",
     institute: "",
     dateawarded: "",
@@ -107,7 +103,7 @@ function Certification() {
   };
   return (
     <div className="container mx-auto">
-      <ElementHeader title="Certification" triggerchange={() => {}} />
+      <ElementHeader title="Certification" />
       <div className="w-full flex justify-around">
         <div className="w-1/3 pt-6 ">
           <AppInput

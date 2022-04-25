@@ -15,7 +15,7 @@ function Language() {
   });
   return (
     <div className="container mx-auto">
-      <ElementHeader title="Languages" triggerchange={() => {}} />
+      <ElementHeader title="Languages" />
       <div className="w-full flex justify-around">
         <div className="w-1/3 pt-6 ">
           <>
@@ -24,8 +24,9 @@ function Language() {
               triggerchange={() => {}}
               value=""
               label="Add a language"
+              mandatory
             />
-            <AppRange />
+            <AppRange triggerChange={() => {}} />
             <AppBtn label="Save" />
           </>
         </div>

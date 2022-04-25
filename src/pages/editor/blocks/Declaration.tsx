@@ -61,13 +61,7 @@ function Declaration() {
   };
   return (
     <div className="container mx-auto">
-      <ElementHeader
-        title="Declaration"
-        triggerchange={(e) => {
-          SetDeclaration({ ...declaration, showinprint: !e });
-        }}
-        value={declaration.showinprint}
-      />
+      <ElementHeader title="Declaration" value={declaration.showinprint} />
       <div className="w-full flex justify-around">
         <div className="w-1/2 pt-6 ">
           <AppTextArea

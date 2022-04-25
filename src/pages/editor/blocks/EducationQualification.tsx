@@ -16,10 +16,7 @@ function EducationQualification() {
   });
   return (
     <div className="container mx-auto">
-      <ElementHeader
-        title="Educational Qualification"
-        triggerchange={() => {}}
-      />
+      <ElementHeader title="Educational Qualification" />
       <div className="w-full flex justify-around">
         <div className="w-1/3 pt-6 ">
           <AppInput
