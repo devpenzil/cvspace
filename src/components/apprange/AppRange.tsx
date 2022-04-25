@@ -1,8 +1,9 @@
 import React from "react";
 interface props {
   triggerChange: (e: any) => void;
+  value?: string;
 }
-function AppRange({ triggerChange }: props) {
+function AppRange({ triggerChange, value }: props) {
   return (
     <div>
       <div>
@@ -10,7 +11,7 @@ function AppRange({ triggerChange }: props) {
           type="range"
           min={0}
           max={100}
-          defaultValue={50}
+          value={value || 50}
           className="range range-xs range-primary"
           step={25}
           onChange={(e) => {

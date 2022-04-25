@@ -33,7 +33,7 @@ function AppDate({
         onChange={(e) => {
           triggerChange(e.target.value);
         }}
-        value={value}
+        value={!present ? value : ""}
         readOnly={loading}
       />
       {presentcheck && (
@@ -44,6 +44,7 @@ function AppDate({
               className="checkbox checkbox-xs"
               onClick={() => {
                 SetPresent(!present);
+                triggerChange("present");
               }}
             />
             <span className="label-text font-bold">Present</span>

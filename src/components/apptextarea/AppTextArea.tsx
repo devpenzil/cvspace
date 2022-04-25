@@ -23,11 +23,11 @@ function AppTextArea({
       <textarea
         className={"textarea textarea-bordered h-60 "}
         placeholder="Type here."
-        defaultValue={value}
         onChange={(e: any) => {
           triggerchange(e.target.value);
         }}
         disabled={loading}
+        value={value}
       />
     </div>
   );
