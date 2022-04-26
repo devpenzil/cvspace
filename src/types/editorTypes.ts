@@ -15,6 +15,7 @@ export interface singleEducation {
   startdate: string | undefined;
   enddate: string | undefined;
   summary: string | undefined;
+  id?: string | undefined;
 }
 export interface SingleLanguage {
   language: string | undefined;

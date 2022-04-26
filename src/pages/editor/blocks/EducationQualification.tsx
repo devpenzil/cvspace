@@ -1,7 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { onAuthStateChanged } from "firebase/auth";
-import { child, get, onValue, push, ref, remove, set } from "firebase/database";
+import {
+  child,
+  get,
+  onValue,
+  push,
+  ref,
+  remove,
+  set,
+  update,
+} from "firebase/database";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import PenIcons from "../../../assets/icons/PenIcons";
@@ -19,6 +28,7 @@ import { useNavigate } from "react-router-dom";
 function EducationQualification() {
   const navigate = useNavigate();
   const [qdata, Setqdata] = useState<any>();
+  const [editmode, Seteditmode] = useState(false);
   const [singleedu, SetSingleEdu] = useState<singleEducation>({
     name: "",
     institute: "",
@@ -96,7 +106,52 @@ function EducationQualification() {
       });
   };
   const updateItem = () => {
-    console.log("editing");
+    if (
+      singleedu.name === "" ||
+      singleedu.institute === "" ||
+      singleedu.enddate === "" ||
+      singleedu.startdate === ""
+    ) {
+      toast.error("Fill all mandatory fields");
+      return false;
+    }
+    update(ref(dbref, `users/${userUid}/education/${singleedu.id}`), {
+      name: singleedu.name,
+      institute: singleedu.institute,
+      startdate: singleedu.startdate,
+      enddate: singleedu.enddate,
+      summary: singleedu.summary,
+    })
+      .then(() => {
+        toast.success("success");
+        fetchdata(userUid);
+      })
+      .catch((Error) => {
+        console.log(Error);
+      });
+    Seteditmode(false);
+    SetisLoading(false);
+    SetSingleEdu({
+      ...singleedu,
+      enddate: "",
+      institute: "",
+      name: "",
+      startdate: "",
+      summary: "",
+      id: "",
+    });
+  };
+  const addtoEdit = (data: any) => {
+    Seteditmode(true);
+    SetSingleEdu({
+      ...singleedu,
+      enddate: data[1].enddate,
+      institute: data[1].institute,
+      name: data[1].name,
+      startdate: data[1].startdate,
+      summary: data[1].summary,
+      id: data[0],
+    });
   };
   return (
     <div className="container mx-auto">
@@ -150,13 +205,23 @@ function EducationQualification() {
               SetSingleEdu({ ...singleedu, summary: e });
             }}
           />
-          <AppBtn
-            label="Save"
-            triggerClick={() => {
-              addItem();
-            }}
-            loading={isLoading}
-          />
+          {editmode ? (
+            <AppBtn
+              label="Update"
+              triggerClick={() => {
+                updateItem();
+              }}
+              loading={isLoading}
+            />
+          ) : (
+            <AppBtn
+              label="Save"
+              triggerClick={() => {
+                addItem();
+              }}
+              loading={isLoading}
+            />
+          )}
         </div>
         <div className="w-1/3">
           {qdata?.length === 0 || (qdata === undefined && <EmptyBlock />)}
@@ -176,7 +241,7 @@ function EducationQualification() {
                         <span
                           className="cursor-pointer"
                           onClick={() => {
-                            updateItem();
+                            addtoEdit(obj);
                           }}
                         >
                           <PenIcons />
