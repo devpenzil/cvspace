@@ -22,18 +22,17 @@ import AppTextArea from "../../../components/apptextarea/AppTextArea";
 import ElementHeader from "../../../components/elementheader/ElementHeader";
 import EmptyBlock from "../../../components/emptyblock/EmptyBlock";
 import { auth, db, dbref } from "../../../firebase/firebase";
-import { singleEducation } from "../../../types/editorTypes";
+import { singleCertificate, singleEducation } from "../../../types/editorTypes";
 import { useNavigate } from "react-router-dom";
 
 function Certification() {
   const navigate = useNavigate();
   const [qdata, Setqdata] = useState<any>();
   const [editmode, Seteditmode] = useState(false);
-  const [singleedu, SetSingleEdu] = useState<singleEducation>({
+  const [singleedu, SetSingleEdu] = useState<singleCertificate>({
     name: "",
     institute: "",
-    startdate: "",
-    enddate: "",
+    dateawarded: "",
     summary: "",
   });
   const [userUid, SetuserUid] = useState<string | undefined>("");
@@ -48,8 +47,7 @@ function Certification() {
     if (
       singleedu.name === "" ||
       singleedu.institute === "" ||
-      singleedu.enddate === "" ||
-      singleedu.startdate === ""
+      singleedu.dateawarded === ""
     ) {
       toast.error("Fill all mandatory fields");
       return false;
@@ -59,18 +57,16 @@ function Certification() {
     set(newPostRef, {
       name: singleedu.name,
       institute: singleedu.institute,
-      startdate: singleedu.startdate,
-      enddate: singleedu.enddate,
+      dateawarded: singleedu.dateawarded,
       summary: singleedu.summary,
     })
       .then(() => {
         toast.success("Updated");
         SetSingleEdu({
           ...singleedu,
-          enddate: "",
+          dateawarded: "",
           institute: "",
           name: "",
-          startdate: "",
           summary: "",
         });
         SetisLoading(false);
@@ -109,8 +105,7 @@ function Certification() {
     if (
       singleedu.name === "" ||
       singleedu.institute === "" ||
-      singleedu.enddate === "" ||
-      singleedu.startdate === ""
+      singleedu.dateawarded === ""
     ) {
       toast.error("Fill all mandatory fields");
       return false;
@@ -118,8 +113,7 @@ function Certification() {
     update(ref(dbref, `users/${userUid}/certificate/${singleedu.id}`), {
       name: singleedu.name,
       institute: singleedu.institute,
-      startdate: singleedu.startdate,
-      enddate: singleedu.enddate,
+      dateawarded: singleedu.dateawarded,
       summary: singleedu.summary,
     })
       .then(() => {
@@ -133,10 +127,9 @@ function Certification() {
     SetisLoading(false);
     SetSingleEdu({
       ...singleedu,
-      enddate: "",
       institute: "",
       name: "",
-      startdate: "",
+      dateawarded: "",
       summary: "",
       id: "",
     });
@@ -145,10 +138,9 @@ function Certification() {
     Seteditmode(true);
     SetSingleEdu({
       ...singleedu,
-      enddate: data[1].enddate,
+      dateawarded: data[1].dateawarded,
       institute: data[1].institute,
       name: data[1].name,
-      startdate: data[1].startdate,
       summary: data[1].summary,
       id: data[0],
     });
@@ -159,7 +151,7 @@ function Certification() {
       <div className="w-full flex justify-around">
         <div className="w-1/3 pt-6 ">
           <AppInput
-            label="Programmme Name"
+            label="Certificate Name"
             triggerchange={(e) => {
               SetSingleEdu({ ...singleedu, name: e });
             }}
@@ -178,22 +170,11 @@ function Certification() {
           />
           <AppDate
             monthonly={true}
-            label={"Start Date"}
+            label={"Date Awarded"}
             triggerChange={(e) => {
-              SetSingleEdu({ ...singleedu, startdate: e });
+              SetSingleEdu({ ...singleedu, dateawarded: e });
             }}
-            value={singleedu.startdate}
-            loading={isLoading}
-            mandatory
-          />
-          <AppDate
-            monthonly={true}
-            label={"End Date"}
-            presentcheck
-            triggerChange={(e) => {
-              SetSingleEdu({ ...singleedu, enddate: e });
-            }}
-            value={singleedu.enddate}
+            value={singleedu.dateawarded}
             loading={isLoading}
             mandatory
           />
@@ -232,9 +213,7 @@ function Certification() {
                   <div className="card w-full bg-base-100 shadow-xl">
                     <div className="card-body">
                       <h2 className="card-title">{obj[1].name}</h2>
-                      <div>
-                        {obj[1].startdate} - {obj[1].enddate}
-                      </div>
+                      <div>{obj[1].dateawarded}</div>
                       <div className="font-bold">{obj[1].institute}</div>
                       <p>{obj[1].summary}</p>
                       <div className="card-actions justify-end">

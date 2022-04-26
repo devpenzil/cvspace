@@ -4,14 +4,16 @@ import AppBtn from "../../../components/appbtn/AppBtn";
 import AppInput from "../../../components/appinput/AppInput";
 import AppTextArea from "../../../components/apptextarea/AppTextArea";
 import ElementHeader from "../../../components/elementheader/ElementHeader";
-import { auth, db, dbref } from "../../../firebase/firebase";
+import { auth, bucket, db, dbref } from "../../../firebase/firebase";
 import { child, get, set, ref } from "firebase/database";
 import { toast } from "react-toastify";
 import { onAuthStateChanged } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-
+import userPlaceholder from "../../../assets/placeholder.png";
+import { uploadBytes } from "firebase/storage";
 function PersonalInfo() {
   const navigate = useNavigate();
+  const [file, SetFile] = useState();
   const [isLoading, SetisLoading] = useState(false);
   const [profiledata, SetProfileData] = useState<{
     name: string | null | undefined;
@@ -83,19 +85,13 @@ function PersonalInfo() {
           <div>
             <div className="avatar cursor-pointer  flex justify-center">
               <div className="w-44 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2 mx-auto">
-                <img
-                  src="https://api.lorem.space/image/face?hash=3174"
-                  className="mx-auto"
-                  alt="user"
-                />
+                <img src={userPlaceholder} className="mx-auto" alt="user" />
               </div>
             </div>
           </div>
           <AppInput
             label="Name"
-            triggerchange={(e) => {
-              SetProfileData({ ...profiledata, name: e });
-            }}
+            triggerchange={(e) => {}}
             value={profiledata.name}
             loading={isLoading}
           />
