@@ -58,6 +58,9 @@ function NavBar() {
                   className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
                 >
                   <li>
+                    <a>Settings</a>
+                  </li>
+                  <li>
                     <a onClick={signout}>Logout</a>
                   </li>
                 </ul>

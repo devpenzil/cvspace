@@ -1,6 +1,7 @@
 export interface singleskills {
-  name: string | undefined;
-  value: string | undefined;
+  skill: string | undefined;
+  rate: string | undefined;
+  id?: string | undefined;
 }
 export interface singleCertificate {
   name: string | undefined | null;
@@ -18,4 +19,5 @@ export interface singleEducation {
 export interface SingleLanguage {
   language: string | undefined;
   rate: string | undefined;
+  id?: string | undefined;
 }

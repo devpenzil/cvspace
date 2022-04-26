@@ -2,8 +2,9 @@ import React from "react";
 interface props {
   triggerChange: (e: any) => void;
   value?: string;
+  loading?: boolean;
 }
-function AppRange({ triggerChange, value }: props) {
+function AppRange({ triggerChange, value, loading }: props) {
   return (
     <div>
       <div>
@@ -17,6 +18,7 @@ function AppRange({ triggerChange, value }: props) {
           onChange={(e) => {
             triggerChange(e.target.value);
           }}
+          readOnly={loading}
         />
         <div className="w-full flex justify-between text-2xl px-2">
           <span>😭</span>

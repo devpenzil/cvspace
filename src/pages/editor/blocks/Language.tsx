@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { onAuthStateChanged } from "firebase/auth";
-import { child, get, push, ref, remove, set } from "firebase/database";
+import { child, get, push, ref, remove, set, update } from "firebase/database";
 import React, { useEffect, useState } from "react";
 import PenIcons from "../../../assets/icons/PenIcons";
 import TrashIcon from "../../../assets/icons/TrashIcon";
@@ -20,9 +20,11 @@ function Language() {
   const navigate = useNavigate();
   const [qdata, Setqdata] = useState<any>([]);
   const [userUid, SetuserUid] = useState<string | undefined>("");
+  const [editmode, SetEditMode] = useState<boolean>(false);
   const [singleData, SetSingleData] = useState<SingleLanguage>({
     language: "",
     rate: "50",
+    id: "",
   });
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -44,8 +46,10 @@ function Language() {
       });
   };
   const addItem = () => {
+    SetisLoading(true);
     if (singleData.language === "") {
       toast.error("Fill all mandatory fields");
+      SetisLoading(false);
       return false;
     }
 
@@ -81,6 +85,36 @@ function Language() {
         console.log("error");
       });
   };
+  const addtoedit = (data: any) => {
+    SetEditMode(true);
+    SetSingleData({
+      ...singleData,
+      language: data[1].language,
+      rate: data[1].rate,
+      id: data[0],
+    });
+  };
+  const updatedata = () => {
+    update(ref(dbref, `users/${userUid}/language/${singleData.id}`), {
+      language: singleData.language,
+      rate: singleData.rate,
+    })
+      .then(() => {
+        toast.success("success");
+        fetchdata(userUid);
+      })
+      .catch((Error) => {
+        console.log(Error);
+      });
+    SetEditMode(false);
+    SetisLoading(false);
+    SetSingleData({
+      ...singleData,
+      language: "",
+      rate: "",
+      id: "",
+    });
+  };
   return (
     <div className="container mx-auto">
       <ElementHeader title="Languages" />
@@ -88,7 +122,7 @@ function Language() {
         <div className="w-1/3 pt-6 ">
           <>
             <AppInput
-              loading={false}
+              loading={isLoading}
               triggerchange={(e) => {
                 SetSingleData({ ...singleData, language: e });
               }}
@@ -101,13 +135,25 @@ function Language() {
                 SetSingleData({ ...singleData, rate: e });
               }}
               value={singleData.rate}
+              loading={isLoading}
             />
-            <AppBtn
-              label="Save"
-              triggerClick={() => {
-                addItem();
-              }}
-            />
+            {editmode ? (
+              <AppBtn
+                label="Update"
+                triggerClick={() => {
+                  updatedata();
+                }}
+                loading={isLoading}
+              />
+            ) : (
+              <AppBtn
+                label="Save"
+                triggerClick={() => {
+                  addItem();
+                }}
+                loading={isLoading}
+              />
+            )}
           </>
         </div>
         <div className="w-1/3">
@@ -124,7 +170,12 @@ function Language() {
                       max={100}
                     />
                     <div className="card-actions justify-end">
-                      <span className="cursor-pointer">
+                      <span
+                        className="cursor-pointer"
+                        onClick={() => {
+                          addtoedit(obj);
+                        }}
+                      >
                         <PenIcons />
                       </span>
                       <span
