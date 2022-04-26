@@ -70,7 +70,7 @@ function Preview() {
           </div>
         </div>
       </div>
-      <div className="flex h-32 justify-center items-center space-x-4 overflow-y-scroll px-3">
+      {/* <div className="flex h-32 justify-center items-center space-x-4 overflow-y-scroll px-3">
         {routes.map((obj, i) => {
           return (
             <div
@@ -88,7 +88,7 @@ function Preview() {
             ></div>
           );
         })}
-      </div>
+      </div> */}
       <div>
         <Routes>
           <Route path="" element={<DesignOne />} />

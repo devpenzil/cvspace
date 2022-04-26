@@ -96,7 +96,7 @@ function Editor() {
           <div>
             <div
               className="flex cursor-pointer items-center"
-              onClick={() => navigate("/preview")}
+              onClick={() => navigate("/preview/design1")}
             >
               Privew <EyeIcon />
             </div>

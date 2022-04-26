@@ -13,7 +13,11 @@ function Layout({ children }: any) {
         {children}
         <ToastContainer newestOnTop />
       </div>
-      <div className="md:hidden">error</div>
+      <div className="md:hidden w-full h-screen flex flex-col justify-center items-center Home ">
+        <div className="w-2/3 text-center font-bold text-lg">
+          Sorry! You can't access the editor on your device, use a large device.
+        </div>
+      </div>
       <SettingsModal />
     </>
   );
