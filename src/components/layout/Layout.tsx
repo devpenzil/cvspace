@@ -3,6 +3,7 @@ import NavBar from "../navbar/NavBar";
 import { ToastContainer } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
+import SettingsModal from "../settingmodal/SettingsModal";
 
 function Layout({ children }: any) {
   return (
@@ -13,6 +14,7 @@ function Layout({ children }: any) {
         <ToastContainer newestOnTop />
       </div>
       <div className="md:hidden">error</div>
+      <SettingsModal />
     </>
   );
 }

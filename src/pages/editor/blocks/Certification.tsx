@@ -1,6 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { onAuthStateChanged } from "firebase/auth";
-import { onValue, push, ref, set } from "firebase/database";
+import {
+  child,
+  get,
+  onValue,
+  push,
+  ref,
+  remove,
+  set,
+  update,
+} from "firebase/database";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import PenIcons from "../../../assets/icons/PenIcons";
@@ -11,71 +21,60 @@ import AppInput from "../../../components/appinput/AppInput";
 import AppTextArea from "../../../components/apptextarea/AppTextArea";
 import ElementHeader from "../../../components/elementheader/ElementHeader";
 import EmptyBlock from "../../../components/emptyblock/EmptyBlock";
-import { auth, dbref } from "../../../firebase/firebase";
+import { auth, db, dbref } from "../../../firebase/firebase";
+import { singleEducation } from "../../../types/editorTypes";
 import { useNavigate } from "react-router-dom";
-import { singleCertificate } from "../../../types/editorTypes";
 
 function Certification() {
   const navigate = useNavigate();
-  const [isLoading, SetisLoading] = useState(false);
-  const [userUid, SetUserUid] = useState<string | undefined>("");
-  const [qdata, Setqdata] = useState({
-    showinprint: true,
-    certificates: [],
-  });
-  const [singleCert, SetsingleCert] = useState<singleCertificate>({
+  const [qdata, Setqdata] = useState<any>();
+  const [editmode, Seteditmode] = useState(false);
+  const [singleedu, SetSingleEdu] = useState<singleEducation>({
     name: "",
     institute: "",
-    dateawarded: "",
+    startdate: "",
+    enddate: "",
     summary: "",
   });
+  const [userUid, SetuserUid] = useState<string | undefined>("");
+  const [isLoading, SetisLoading] = useState(false);
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
-      SetUserUid(user?.uid);
-      user !== null
-        ? onValue(
-            ref(dbref, `users/${userUid}/certificates`),
-            (snapshot) => {
-              console.log(snapshot);
-
-              let temp: any = [];
-              snapshot.forEach((childSnapshot) => {
-                const childData = childSnapshot.val();
-                temp.push(childData);
-              });
-
-              Setqdata({ ...qdata, certificates: temp });
-            },
-            {
-              onlyOnce: true,
-            }
-          )
-        : navigate("/");
+      SetuserUid(user?.uid);
+      user !== null ? fetchdata(user.uid) : navigate("/");
     });
   }, []);
-  const addoneData = () => {
-    SetisLoading(true);
+  const addItem = () => {
     if (
-      singleCert.name === "" ||
-      singleCert.institute === "" ||
-      singleCert.dateawarded === ""
+      singleedu.name === "" ||
+      singleedu.institute === "" ||
+      singleedu.enddate === "" ||
+      singleedu.startdate === ""
     ) {
-      toast.error("Fill the mandatory fields");
-      SetisLoading(false);
+      toast.error("Fill all mandatory fields");
       return false;
     }
-    const postListRef = ref(dbref, `users/${userUid}/certificates`);
+    const postListRef = ref(dbref, `users/${userUid}/certificate`);
     const newPostRef = push(postListRef);
     set(newPostRef, {
-      name: singleCert.name,
-      institute: singleCert.institute,
-      dateawarded: singleCert.dateawarded,
-      summary: singleCert.summary,
+      name: singleedu.name,
+      institute: singleedu.institute,
+      startdate: singleedu.startdate,
+      enddate: singleedu.enddate,
+      summary: singleedu.summary,
     })
       .then(() => {
         toast.success("Updated");
-        fetchFromFirebase();
+        SetSingleEdu({
+          ...singleedu,
+          enddate: "",
+          institute: "",
+          name: "",
+          startdate: "",
+          summary: "",
+        });
         SetisLoading(false);
+        fetchdata(userUid);
       })
       .catch((error) => {
         toast.error("Something went wrong");
@@ -83,93 +82,176 @@ function Certification() {
         SetisLoading(false);
       });
   };
-  const fetchFromFirebase = () => {
-    userUid !== null
-      ? onValue(
-          ref(dbref, `users/${userUid}/certificates`),
-          (snapshot) => {
-            let temp: any = [];
-            snapshot.forEach((childSnapshot) => {
-              const childData = childSnapshot.val();
-              temp.push(childData);
-            });
-            Setqdata({ ...qdata, certificates: temp });
-          },
-          {
-            onlyOnce: true,
-          }
-        )
-      : navigate("/");
+  const fetchdata = (id: any) => {
+    get(child(ref(dbref), `users/${id}/certificate`))
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+          Setqdata(Object.entries(snapshot.val()));
+        } else {
+          console.log("No data available");
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+  const deleteItem = (id: any) => {
+    remove(ref(dbref, `users/${userUid}/certificate/${id}`))
+      .then(() => {
+        toast.success("Item Deleted");
+        fetchdata(userUid);
+      })
+      .catch((Error) => {
+        console.log("error");
+      });
+  };
+  const updateItem = () => {
+    if (
+      singleedu.name === "" ||
+      singleedu.institute === "" ||
+      singleedu.enddate === "" ||
+      singleedu.startdate === ""
+    ) {
+      toast.error("Fill all mandatory fields");
+      return false;
+    }
+    update(ref(dbref, `users/${userUid}/certificate/${singleedu.id}`), {
+      name: singleedu.name,
+      institute: singleedu.institute,
+      startdate: singleedu.startdate,
+      enddate: singleedu.enddate,
+      summary: singleedu.summary,
+    })
+      .then(() => {
+        toast.success("success");
+        fetchdata(userUid);
+      })
+      .catch((Error) => {
+        console.log(Error);
+      });
+    Seteditmode(false);
+    SetisLoading(false);
+    SetSingleEdu({
+      ...singleedu,
+      enddate: "",
+      institute: "",
+      name: "",
+      startdate: "",
+      summary: "",
+      id: "",
+    });
+  };
+  const addtoEdit = (data: any) => {
+    Seteditmode(true);
+    SetSingleEdu({
+      ...singleedu,
+      enddate: data[1].enddate,
+      institute: data[1].institute,
+      name: data[1].name,
+      startdate: data[1].startdate,
+      summary: data[1].summary,
+      id: data[0],
+    });
   };
   return (
     <div className="container mx-auto">
-      <ElementHeader title="Certification" />
+      <ElementHeader title="Certifications" />
       <div className="w-full flex justify-around">
         <div className="w-1/3 pt-6 ">
           <AppInput
-            label="Certificate Name"
+            label="Programmme Name"
             triggerchange={(e) => {
-              SetsingleCert({ ...singleCert, name: e });
+              SetSingleEdu({ ...singleedu, name: e });
             }}
             loading={isLoading}
-            value={singleCert.name}
+            value={singleedu.name}
             mandatory
           />
           <AppInput
             label="Institution Name"
             triggerchange={(e) => {
-              SetsingleCert({ ...singleCert, institute: e });
+              SetSingleEdu({ ...singleedu, institute: e });
             }}
             loading={isLoading}
-            value={singleCert.institute}
+            value={singleedu.institute}
             mandatory
           />
           <AppDate
             monthonly={true}
-            label={"Date awareded"}
-            value={singleCert.dateawarded}
+            label={"Start Date"}
             triggerChange={(e) => {
-              SetsingleCert({ ...singleCert, dateawarded: e });
+              SetSingleEdu({ ...singleedu, startdate: e });
             }}
+            value={singleedu.startdate}
+            loading={isLoading}
+            mandatory
+          />
+          <AppDate
+            monthonly={true}
+            label={"End Date"}
+            presentcheck
+            triggerChange={(e) => {
+              SetSingleEdu({ ...singleedu, enddate: e });
+            }}
+            value={singleedu.enddate}
+            loading={isLoading}
             mandatory
           />
           <AppTextArea
             label="Summary (if any)"
             loading={isLoading}
-            value={singleCert.summary}
+            value={singleedu.summary}
             triggerchange={(e) => {
-              SetsingleCert({ ...singleCert, summary: e });
+              SetSingleEdu({ ...singleedu, summary: e });
             }}
           />
-          <AppBtn label="Save" triggerClick={addoneData} loading={isLoading} />
+          {editmode ? (
+            <AppBtn
+              label="Update"
+              triggerClick={() => {
+                updateItem();
+              }}
+              loading={isLoading}
+            />
+          ) : (
+            <AppBtn
+              label="Save"
+              triggerClick={() => {
+                addItem();
+              }}
+              loading={isLoading}
+            />
+          )}
         </div>
         <div className="w-1/3">
-          {qdata.certificates.length === 0 && <EmptyBlock />}
-          {qdata.certificates.map(
-            (
-              obj: {
-                name: string;
-                institute: string;
-                dateawarded: string;
-                summary: string;
-              },
-              i
-            ) => {
+          {qdata?.length === 0 || (qdata === undefined && <EmptyBlock />)}
+          {qdata !== null &&
+            qdata?.map((obj: any, i: any) => {
               return (
                 <div className="py-3" key={i}>
                   <div className="card w-full bg-base-100 shadow-xl">
                     <div className="card-body">
-                      <h2 className="card-title">{obj.name}</h2>
+                      <h2 className="card-title">{obj[1].name}</h2>
                       <div>
-                        {obj.dateawarded} -{" "}
-                        <span className="font-bold">{obj.institute}</span>
+                        {obj[1].startdate} - {obj[1].enddate}
                       </div>
-                      <p>{obj.summary}</p>
+                      <div className="font-bold">{obj[1].institute}</div>
+                      <p>{obj[1].summary}</p>
                       <div className="card-actions justify-end">
-                        <span className="cursor-pointer">
+                        <span
+                          className="cursor-pointer"
+                          onClick={() => {
+                            addtoEdit(obj);
+                          }}
+                        >
                           <PenIcons />
                         </span>
-                        <span className="cursor-pointer">
+                        <span
+                          className="cursor-pointer"
+                          onClick={() => {
+                            deleteItem(obj[0]);
+                          }}
+                        >
                           <TrashIcon />
                         </span>
                       </div>
@@ -177,8 +259,7 @@ function Certification() {
                   </div>
                 </div>
               );
-            }
-          )}
+            })}
         </div>
       </div>
     </div>

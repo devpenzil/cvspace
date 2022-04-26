@@ -4,14 +4,23 @@ export interface singleskills {
   id?: string | undefined;
 }
 export interface singleCertificate {
-  name: string | undefined | null;
-  institute: string | undefined | null;
+  name: string | undefined;
+  institute: string | undefined;
   dateawarded: string | undefined;
-  summary: string | undefined | null;
+  summary: string | undefined;
+  id?: string | undefined;
 }
 export interface singleEducation {
   name: string | undefined;
   institute: string | undefined;
+  startdate: string | undefined;
+  enddate: string | undefined;
+  summary: string | undefined;
+  id?: string | undefined;
+}
+export interface singleProf {
+  name: string | undefined;
+  role: string | undefined;
   startdate: string | undefined;
   enddate: string | undefined;
   summary: string | undefined;
