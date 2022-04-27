@@ -61,14 +61,14 @@ function Preview() {
           </ul>
         </div>
         <div className="flex space-x-5">
-          {/* <div>
+          <div>
             <label
               htmlFor="preview-options"
               className=" modal-button btn btn-circle "
             >
               <FilterIcon />
             </label>
-          </div> */}
+          </div>
           <div
             className="flex items-center cursor-pointer"
             onClick={() => {
@@ -79,7 +79,7 @@ function Preview() {
           </div>
         </div>
       </div>
-      {/* <div className="flex h-32 justify-center items-center space-x-4 overflow-y-scroll px-3">
+      <div className="flex h-32 justify-center items-center space-x-4 overflow-y-scroll px-3">
         {routes.map((obj, i) => {
           return (
             <div
@@ -97,7 +97,7 @@ function Preview() {
             ></div>
           );
         })}
-      </div> */}
+      </div>
       <div className="mt-12">
         <Routes>
           <Route path="" element={<DesignOne />} />
@@ -117,12 +117,6 @@ function Preview() {
         <input type="checkbox" id="preview-options" className="modal-toggle" />
         <div className="modal">
           <div className="modal-box relative">
-            <label
-              htmlFor="preview-options"
-              className="btn btn-sm btn-circle btn-primary absolute right-2 top-2"
-            >
-              ✕
-            </label>
             <h3 className="text-lg font-bold">
               Choose what would you like to show in the print
             </h3>
@@ -164,7 +158,11 @@ function Preview() {
                 </label>
               </div>
             </div>
-            <button className="btn btn-primary">Save</button>
+            <div className="modal-action">
+              <label htmlFor="preview-options" className="btn btn-primary">
+                Save
+              </label>
+            </div>
           </div>
         </div>
       </div>
