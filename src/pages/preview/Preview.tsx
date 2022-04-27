@@ -8,6 +8,7 @@ import DesignThree from "./blocks/DesignThree";
 import DesignFour from "./blocks/DesignFour";
 import DesignFive from "./blocks/DesignFive";
 import DownloadIcon from "../../assets/icons/DownloadIcon";
+import FilterIcon from "../../assets/icons/FilterIcon";
 function Preview() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -59,7 +60,15 @@ function Preview() {
             <li>preview</li>
           </ul>
         </div>
-        <div>
+        <div className="flex space-x-5">
+          {/* <div>
+            <label
+              htmlFor="preview-options"
+              className=" modal-button btn btn-circle "
+            >
+              <FilterIcon />
+            </label>
+          </div> */}
           <div
             className="flex items-center cursor-pointer"
             onClick={() => {
@@ -89,7 +98,7 @@ function Preview() {
           );
         })}
       </div> */}
-      <div>
+      <div className="mt-12">
         <Routes>
           <Route path="" element={<DesignOne />} />
           <Route path="design1" element={<DesignOne />} />
@@ -103,6 +112,61 @@ function Preview() {
         <button className="btn gap-2 flex items-center">
           Download <DownloadIcon />
         </button>
+      </div>
+      <div>
+        <input type="checkbox" id="preview-options" className="modal-toggle" />
+        <div className="modal">
+          <div className="modal-box relative">
+            <label
+              htmlFor="preview-options"
+              className="btn btn-sm btn-circle btn-primary absolute right-2 top-2"
+            >
+              ✕
+            </label>
+            <h3 className="text-lg font-bold">
+              Choose what would you like to show in the print
+            </h3>
+            <div className="py-4">
+              <div className="form-control w-fit gap-4">
+                <label className="label cursor-pointer gap-4">
+                  <input type="checkbox" className="checkbox" />
+                  <span className="label-text">Education Qualification</span>
+                </label>
+              </div>
+              <div className="form-control w-fit gap-4">
+                <label className="label cursor-pointer gap-4">
+                  <input type="checkbox" className="checkbox" />
+                  <span className="label-text">Proffessional Experiance</span>
+                </label>
+              </div>
+              <div className="form-control w-fit gap-4">
+                <label className="label cursor-pointer gap-4">
+                  <input type="checkbox" className="checkbox" />
+                  <span className="label-text">Certification</span>
+                </label>
+              </div>
+              <div className="form-control w-fit gap-4">
+                <label className="label cursor-pointer gap-4">
+                  <input type="checkbox" className="checkbox" />
+                  <span className="label-text">Skill</span>
+                </label>
+              </div>
+              <div className="form-control w-fit gap-4">
+                <label className="label cursor-pointer gap-4">
+                  <input type="checkbox" className="checkbox" />
+                  <span className="label-text">Language</span>
+                </label>
+              </div>
+              <div className="form-control w-fit gap-4">
+                <label className="label cursor-pointer gap-4">
+                  <input type="checkbox" className="checkbox" />
+                  <span className="label-text">Declaration</span>
+                </label>
+              </div>
+            </div>
+            <button className="btn btn-primary">Save</button>
+          </div>
+        </div>
       </div>
     </div>
   );
