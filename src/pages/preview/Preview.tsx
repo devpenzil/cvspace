@@ -64,7 +64,7 @@ function Preview() {
           <div>
             <label
               htmlFor="preview-options"
-              className=" modal-button btn btn-circle "
+              className=" modal-button btn btn-circle btn-sm "
             >
               <FilterIcon />
             </label>
@@ -79,7 +79,7 @@ function Preview() {
           </div>
         </div>
       </div>
-      <div className="flex h-32 justify-center items-center space-x-4 overflow-y-scroll px-3">
+      <div className="flex h-32 justify-center items-center space-x-4 overflow-x-auto px-3">
         {routes.map((obj, i) => {
           return (
             <div
@@ -98,7 +98,7 @@ function Preview() {
           );
         })}
       </div>
-      <div className="mt-12">
+      <div className="mt-12 bg-slate-600 p-5">
         <Routes>
           <Route path="" element={<DesignOne />} />
           <Route path="design1" element={<DesignOne />} />
@@ -108,7 +108,7 @@ function Preview() {
           <Route path="design5" element={<DesignFive />} />
         </Routes>
       </div>
-      <div className="absolute bottom-10 right-10">
+      <div className="fixed bottom-10 right-10">
         <button className="btn gap-2 flex items-center">
           Download <DownloadIcon />
         </button>
