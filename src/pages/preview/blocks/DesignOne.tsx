@@ -17,6 +17,7 @@ interface props {
     personalinfo?: any;
     prof?: any;
     skills?: any;
+    certificate?: any;
   };
 }
 function DesignOne({ data }: props) {
@@ -39,13 +40,13 @@ function DesignOne({ data }: props) {
         <div className="h-20" />
         <Intro data={data?.personalinfo} />
         <div className="h-10" />
-        <WorkSummary />
+        <WorkSummary data={data?.prof} />
         <div className="h-10" />
-        <EducationSummary />
+        <EducationSummary data={data?.education} />
         <div className="h-10" />
-        <Certificate />
+        <Certificate data={data?.certificate} />
         <div className="h-10" />
-        <Declaration />
+        <Declaration data={data?.declaration} />
       </div>
     </div>
   );

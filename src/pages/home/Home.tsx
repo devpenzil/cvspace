@@ -15,7 +15,7 @@ function Home() {
   const provider = new GoogleAuthProvider();
   const loginWithpopup = () => {
     signInWithPopup(auth, provider)
-      .then((result) => {
+      .then(() => {
         toast.success("Login success");
         navigation("/editor");
       })

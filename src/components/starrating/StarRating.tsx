@@ -4,8 +4,6 @@ interface props {
   value: string;
 }
 function StarRating({ value }: props) {
-  console.log(value);
-
   return (
     <div>
       <div className="flex space-x-2">

@@ -1,5 +1,4 @@
 import React from "react";
-import Star from "../../../assets/icons/Star";
 import StarRating from "../../../components/starrating/StarRating";
 interface props {
   data: any;
@@ -12,8 +11,6 @@ function LanguageSummary({ data }: props) {
           <div className="text-2xl font-bold">Language</div>
           <div className="space-y-3 mt-3">
             {Object.entries(data).map((obj: any, i) => {
-              console.log(obj);
-
               return (
                 <div
                   className="flex items-center justify-between flex-wrap"

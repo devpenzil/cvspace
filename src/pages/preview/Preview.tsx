@@ -43,7 +43,6 @@ function Preview() {
       .then((snapshot) => {
         if (snapshot.exists()) {
           SetpreivewData(snapshot.val());
-          console.log(preivewData);
         } else {
           console.log("No data available");
         }
@@ -98,22 +97,26 @@ function Preview() {
           );
         })}
       </div>
-      <div className="mt-12 bg-slate-600 p-5 rounded-lg">
-        <Routes>
-          <Route
-            path=""
-            element={<DesignOne data={preivewData !== null && preivewData} />}
-          />
-          <Route
-            path="design1"
-            element={<DesignOne data={preivewData !== null && preivewData} />}
-          />
-          <Route path="design2" element={<DesignTwo />} />
-          <Route path="design3" element={<DesignThree />} />
-          <Route path="design4" element={<DesignFour />} />
-          <Route path="design5" element={<DesignFive />} />
-        </Routes>
-      </div>
+      {preivewData ? (
+        <div className="mt-12 bg-slate-600 p-5 rounded-lg">
+          <Routes>
+            <Route
+              path=""
+              element={<DesignOne data={preivewData !== null && preivewData} />}
+            />
+            <Route
+              path="design1"
+              element={<DesignOne data={preivewData !== null && preivewData} />}
+            />
+            <Route path="design2" element={<DesignTwo />} />
+            <Route path="design3" element={<DesignThree />} />
+            <Route path="design4" element={<DesignFour />} />
+            <Route path="design5" element={<DesignFive />} />
+          </Routes>
+        </div>
+      ) : (
+        "Loading"
+      )}
       <div className="fixed bottom-10 right-10">
         <button className="btn gap-2 flex items-center">
           Download <DownloadIcon />
