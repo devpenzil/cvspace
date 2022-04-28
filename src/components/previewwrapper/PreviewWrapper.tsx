@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 function PreviewWrapper({ children, path }: any) {
   const navigate = useNavigate();
   return (
-    <div className=" rounded-lg cursor-pointer relative group overflow-hidden hover:ring-2">
+    <div className=" rounded-lg cursor-pointer relative group overflow-hidden hover:ring-2 select-none">
       {children}
       <button
         onClick={() => {
