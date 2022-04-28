@@ -35,7 +35,7 @@ function PersonalInfo() {
     onAuthStateChanged(auth, (user) => {
       SetuseUid(user?.uid);
       user !== null
-        ? get(child(db, `users/${user.uid}/personal-info`))
+        ? get(child(db, `users/${user.uid}/personalinfo`))
             .then((snapshot) => {
               if (snapshot.exists()) {
                 SetProfileData({
@@ -59,7 +59,7 @@ function PersonalInfo() {
   }, []);
   const updateFirebase = () => {
     SetisLoading(true);
-    set(ref(dbref, `users/${userUid}/personal-info`), {
+    set(ref(dbref, `users/${userUid}/personalinfo`), {
       name: profiledata.name,
       email: profiledata.email,
       phone: profiledata.phone,
@@ -91,7 +91,9 @@ function PersonalInfo() {
           </div>
           <AppInput
             label="Name"
-            triggerchange={(e) => {}}
+            triggerchange={(e) => {
+              SetProfileData({ ...profiledata, name: e });
+            }}
             value={profiledata.name}
             loading={isLoading}
           />

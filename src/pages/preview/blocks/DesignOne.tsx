@@ -20,8 +20,6 @@ interface props {
   };
 }
 function DesignOne({ data }: props) {
-  console.log(data?.declaration);
-
   return (
     <div className="flex w-full bg-white rounded-lg">
       <div className="bg-sky-800 text-white w-1/3 py-20 px-8 rounded-lg">
@@ -32,14 +30,14 @@ function DesignOne({ data }: props) {
             </div>
           </div>
         </div>
-        <ContactMe />
-        <SkillsSummary />
-        <LanguageSummary />
+        <ContactMe data={data?.personalinfo} />
+        <SkillsSummary data={data?.skills} />
+        <LanguageSummary data={data?.language} />
       </div>
       <div className=" w-2/3 py-20 px-8 rounded-lg">
-        <Name />
+        <Name data={data?.personalinfo} />
         <div className="h-20" />
-        <Intro />
+        <Intro data={data?.personalinfo} />
         <div className="h-10" />
         <WorkSummary />
         <div className="h-10" />
