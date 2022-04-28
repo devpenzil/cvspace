@@ -3,7 +3,7 @@ import React from "react";
 function FilterIcon() {
   return (
     <>
-      <svg width="24" height="24" fill="none" viewBox="0 0 24 24">
+      <svg width="20" height="20" fill="none" viewBox="0 0 24 24">
         <path
           stroke="currentColor"
           strokeLinecap="round"

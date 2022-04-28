@@ -9,8 +9,19 @@ import LanguageSummary from "../d1block/LanguageSummary";
 import Name from "../d1block/Name";
 import SkillsSummary from "../d1block/SkillsSummary";
 import WorkSummary from "../d1block/WorkSummary";
+interface props {
+  data: {
+    declaration?: any;
+    education?: any;
+    language?: any;
+    personalinfo?: any;
+    prof?: any;
+    skills?: any;
+  };
+}
+function DesignOne({ data }: props) {
+  console.log(data?.declaration);
 
-function DesignOne() {
   return (
     <div className="flex w-full bg-white rounded-lg">
       <div className="bg-sky-800 text-white w-1/3 py-20 px-8 rounded-lg">

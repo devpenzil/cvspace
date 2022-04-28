@@ -10,9 +10,9 @@ function Square(props: any) {
           x="5.75"
           y="5.75"
           stroke="currentColor"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="1.5"
           rx="1"
           {...props}
         ></rect>

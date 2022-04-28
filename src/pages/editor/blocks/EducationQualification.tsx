@@ -45,6 +45,7 @@ function EducationQualification() {
     });
   }, []);
   const addItem = () => {
+    SetisLoading(true);
     if (
       singleedu.name === "" ||
       singleedu.institute === "" ||
@@ -52,6 +53,7 @@ function EducationQualification() {
       singleedu.startdate === ""
     ) {
       toast.error("Fill all mandatory fields");
+      SetisLoading(false);
       return false;
     }
     const postListRef = ref(dbref, `users/${userUid}/education`);

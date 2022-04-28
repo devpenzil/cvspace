@@ -1,4 +1,5 @@
-import React from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect, useState } from "react";
 import PenIcons from "../../assets/icons/PenIcons";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Routes, Route } from "react-router-dom";
@@ -9,7 +10,12 @@ import DesignFour from "./blocks/DesignFour";
 import DesignFive from "./blocks/DesignFive";
 import DownloadIcon from "../../assets/icons/DownloadIcon";
 import FilterIcon from "../../assets/icons/FilterIcon";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth, dbref } from "../../firebase/firebase";
+import { child, get, ref } from "firebase/database";
 function Preview() {
+  const [userUid, SetuserUid] = useState<string | undefined>("");
+  const [preivewData, SetpreivewData] = useState<any>();
   const navigate = useNavigate();
   const location = useLocation();
   const routes = [
@@ -19,38 +25,33 @@ function Preview() {
       active:
         location.pathname === "/preview/design1" ||
         location.pathname === "/preview",
-      image:
-        "https://images.pexels.com/photos/5673502/pexels-photo-5673502.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
     },
     {
       name: "Design 2",
       route: "design2",
       active: location.pathname === "/preview/design2",
-      image:
-        "https://images.pexels.com/photos/5989925/pexels-photo-5989925.jpeg?auto=compress&cs=tinysrgb&w=1600",
-    },
-    {
-      name: "Design 3",
-      route: "design3",
-      active: location.pathname === "/preview/design3",
-      image:
-        "https://images.pexels.com/photos/590016/pexels-photo-590016.jpeg?auto=compress&cs=tinysrgb&w=1600",
-    },
-    {
-      name: "Design 4",
-      route: "design4",
-      active: location.pathname === "/preview/design4",
-      image:
-        "https://images.pexels.com/photos/5989926/pexels-photo-5989926.jpeg?auto=compress&cs=tinysrgb&w=1600",
-    },
-    {
-      name: "Design 5",
-      route: "design5",
-      active: location.pathname === "/preview/design5",
-      image:
-        "https://images.pexels.com/photos/5922530/pexels-photo-5922530.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     },
   ];
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      SetuserUid(user?.uid);
+      user !== null ? fetchdata(user.uid) : navigate("/");
+    });
+  }, []);
+  const fetchdata = (id: any) => {
+    get(child(ref(dbref), `users/${id}`))
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+          SetpreivewData(snapshot.val());
+          console.log(preivewData);
+        } else {
+          console.log("No data available");
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
   return (
     <div className="container mx-auto bg-white rounded-md p-6">
       <div className="flex justify-between items-center">
@@ -79,29 +80,34 @@ function Preview() {
           </div>
         </div>
       </div>
-      <div className="flex h-32 justify-center items-center space-x-4 overflow-x-auto px-3">
+      <div className="flex  justify-center items-center space-x-4 overflow-x-auto px-3">
         {routes.map((obj, i) => {
           return (
-            <div
+            <button
               className={
-                "min-w-[96px] h-24 bg-slate-200 rounded-lg hover:scale-110 cursor-pointer transition duration-300 text-sm font-bold bg-cover bg-center text-white " +
-                (obj.active && "-translate-y-3")
+                "btn btn-circle btn-primary " +
+                (obj.active ? " " : "btn-outline")
               }
               key={i}
               onClick={() => {
                 navigate(obj.route);
               }}
-              style={{
-                backgroundImage: `url(${obj.image})`,
-              }}
-            ></div>
+            >
+              {i + 1}
+            </button>
           );
         })}
       </div>
-      <div className="mt-12 bg-slate-600 p-5">
+      <div className="mt-12 bg-slate-600 p-5 rounded-lg">
         <Routes>
-          <Route path="" element={<DesignOne />} />
-          <Route path="design1" element={<DesignOne />} />
+          <Route
+            path=""
+            element={<DesignOne data={preivewData !== null && preivewData} />}
+          />
+          <Route
+            path="design1"
+            element={<DesignOne data={preivewData !== null && preivewData} />}
+          />
           <Route path="design2" element={<DesignTwo />} />
           <Route path="design3" element={<DesignThree />} />
           <Route path="design4" element={<DesignFour />} />
@@ -118,7 +124,7 @@ function Preview() {
         <div className="modal">
           <div className="modal-box relative">
             <h3 className="text-lg font-bold">
-              Choose what would you like to show in the print
+              Choose what would you like to show in your Resume
             </h3>
             <div className="py-4">
               <div className="form-control w-fit gap-4">

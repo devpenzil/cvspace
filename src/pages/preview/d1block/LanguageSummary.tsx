@@ -6,9 +6,12 @@ function LanguageSummary() {
     <div className="mt-10">
       <div className="text-2xl font-bold">Language</div>
       <div className="space-y-3 mt-3">
-        {[1, 2, 3, 4].map((obj) => {
+        {[1, 2, 3, 4].map((obj, i) => {
           return (
-            <div className="flex items-center justify-between flex-wrap">
+            <div
+              className="flex items-center justify-between flex-wrap"
+              key={i}
+            >
               <div>malayalam</div>
               <div className="flex space-x-2">
                 <Star fill="#fff" />

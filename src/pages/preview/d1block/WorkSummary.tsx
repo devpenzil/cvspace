@@ -6,9 +6,9 @@ function WorkSummary() {
     <div className="mt-6">
       <div className="text-3xl font-bold">Work Experience</div>
       <div className="mt-3 space-y-6">
-        {[1, 2, 3].map((obj) => {
+        {[1, 2, 3].map((obj, i) => {
           return (
-            <div className="flex space-x-2">
+            <div className="flex space-x-2" key={i}>
               <div className="mt-1">
                 <Square />
               </div>
