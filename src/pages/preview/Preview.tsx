@@ -14,6 +14,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth, dbref } from "../../firebase/firebase";
 import { child, get, ref } from "firebase/database";
 import Loader from "../../components/loader/Loader";
+import { viewOptions } from "../../types/previewTypes";
 function Preview() {
   const [preivewData, SetpreivewData] = useState<any>();
   const navigate = useNavigate();
@@ -32,6 +33,14 @@ function Preview() {
       active: location.pathname === "/preview/design2",
     },
   ];
+  const [viewoptions, SetSetViewoptions] = useState<viewOptions>({
+    educational: true,
+    proff: true,
+    certification: true,
+    skill: true,
+    language: true,
+    declaration: true,
+  });
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       user !== null ? fetchdata(user?.uid) : navigate("/");
@@ -50,6 +59,7 @@ function Preview() {
         console.error(error);
       });
   };
+  const printPdf = () => {};
   return (
     <div className="container mx-auto bg-white rounded-md p-6">
       <div className="flex justify-between items-center">
@@ -101,15 +111,30 @@ function Preview() {
           <Routes>
             <Route
               path=""
-              element={<DesignOne data={preivewData !== null && preivewData} />}
+              element={
+                <DesignOne
+                  data={preivewData !== null && preivewData}
+                  view={viewoptions}
+                />
+              }
             />
             <Route
               path="design1"
-              element={<DesignOne data={preivewData !== null && preivewData} />}
+              element={
+                <DesignOne
+                  data={preivewData !== null && preivewData}
+                  view={viewoptions}
+                />
+              }
             />
             <Route
               path="design2"
-              element={<DesignTwo data={preivewData !== null && preivewData} />}
+              element={
+                <DesignTwo
+                  data={preivewData !== null && preivewData}
+                  view={viewoptions}
+                />
+              }
             />
             <Route path="design3" element={<DesignThree />} />
             <Route path="design4" element={<DesignFour />} />
@@ -120,7 +145,7 @@ function Preview() {
         <Loader />
       )}
       <div className="fixed bottom-10 right-10">
-        <button className="btn gap-2 flex items-center">
+        <button className="btn gap-2 flex items-center" onClick={printPdf}>
           Download <DownloadIcon />
         </button>
       </div>
@@ -134,44 +159,104 @@ function Preview() {
             <div className="py-4">
               <div className="form-control w-fit gap-4">
                 <label className="label cursor-pointer gap-4">
-                  <input type="checkbox" className="checkbox" />
+                  <input
+                    type="checkbox"
+                    className="checkbox"
+                    checked={viewoptions.educational}
+                    onClick={() =>
+                      SetSetViewoptions({
+                        ...viewoptions,
+                        educational: !viewoptions.educational,
+                      })
+                    }
+                  />
                   <span className="label-text">Education Qualification</span>
                 </label>
               </div>
               <div className="form-control w-fit gap-4">
                 <label className="label cursor-pointer gap-4">
-                  <input type="checkbox" className="checkbox" />
+                  <input
+                    type="checkbox"
+                    className="checkbox"
+                    checked={viewoptions.proff}
+                    onClick={() =>
+                      SetSetViewoptions({
+                        ...viewoptions,
+                        proff: !viewoptions.proff,
+                      })
+                    }
+                  />
                   <span className="label-text">Proffessional Experiance</span>
                 </label>
               </div>
               <div className="form-control w-fit gap-4">
                 <label className="label cursor-pointer gap-4">
-                  <input type="checkbox" className="checkbox" />
+                  <input
+                    type="checkbox"
+                    className="checkbox"
+                    checked={viewoptions.certification}
+                    onClick={() =>
+                      SetSetViewoptions({
+                        ...viewoptions,
+                        certification: !viewoptions.certification,
+                      })
+                    }
+                  />
                   <span className="label-text">Certification</span>
                 </label>
               </div>
               <div className="form-control w-fit gap-4">
                 <label className="label cursor-pointer gap-4">
-                  <input type="checkbox" className="checkbox" />
+                  <input
+                    type="checkbox"
+                    className="checkbox"
+                    checked={viewoptions.skill}
+                    onClick={() =>
+                      SetSetViewoptions({
+                        ...viewoptions,
+                        skill: !viewoptions.skill,
+                      })
+                    }
+                  />
                   <span className="label-text">Skill</span>
                 </label>
               </div>
               <div className="form-control w-fit gap-4">
                 <label className="label cursor-pointer gap-4">
-                  <input type="checkbox" className="checkbox" />
+                  <input
+                    type="checkbox"
+                    className="checkbox"
+                    checked={viewoptions.language}
+                    onClick={() =>
+                      SetSetViewoptions({
+                        ...viewoptions,
+                        language: !viewoptions.language,
+                      })
+                    }
+                  />
                   <span className="label-text">Language</span>
                 </label>
               </div>
               <div className="form-control w-fit gap-4">
                 <label className="label cursor-pointer gap-4">
-                  <input type="checkbox" className="checkbox" />
+                  <input
+                    type="checkbox"
+                    className="checkbox"
+                    checked={viewoptions.declaration}
+                    onClick={() =>
+                      SetSetViewoptions({
+                        ...viewoptions,
+                        declaration: !viewoptions.declaration,
+                      })
+                    }
+                  />
                   <span className="label-text">Declaration</span>
                 </label>
               </div>
             </div>
             <div className="modal-action">
               <label htmlFor="preview-options" className="btn btn-primary">
-                Save
+                close
               </label>
             </div>
           </div>

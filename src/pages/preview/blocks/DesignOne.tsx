@@ -1,5 +1,6 @@
 import React from "react";
 import userPlaceholder from "../../../assets/placeholder.png";
+import { viewOptions } from "../../../types/previewTypes";
 import Certificate from "../d1block/Certificate";
 import ContactMe from "../d1block/ContactMe";
 import Declaration from "../d1block/Declaration";
@@ -19,8 +20,9 @@ interface props {
     skills?: any;
     certificate?: any;
   };
+  view: viewOptions;
 }
-function DesignOne({ data }: props) {
+function DesignOne({ data, view }: props) {
   return (
     <div className="flex w-full bg-white rounded-lg">
       <div className="bg-sky-800 text-white w-1/3 py-20 px-8 rounded-lg">
@@ -33,23 +35,47 @@ function DesignOne({ data }: props) {
         </div>
         <div className="h-10" />
         <ContactMe data={data?.personalinfo} />
-        <div className="h-10" />
-        <SkillsSummary data={data?.skills} />
-        <div className="h-10" />
-        <LanguageSummary data={data?.language} />
+        {view.skill && (
+          <>
+            <div className="h-10" />
+            <SkillsSummary data={data?.skills} />
+          </>
+        )}
+        {view.language && (
+          <>
+            <div className="h-10" />
+            <LanguageSummary data={data?.language} />
+          </>
+        )}
       </div>
       <div className=" w-2/3 py-20 px-8 rounded-lg">
         <Name data={data?.personalinfo} />
         <div className="h-20" />
         <Intro data={data?.personalinfo} />
-        <div className="h-16" />
-        <WorkSummary data={data?.prof} />
-        <div className="h-16" />
-        <EducationSummary data={data?.education} />
-        <div className="h-16" />
-        <Certificate data={data?.certificate} />
-        <div className="h-16" />
-        <Declaration data={data?.declaration} />
+        {view.proff && (
+          <>
+            <div className="h-16" />
+            <WorkSummary data={data?.prof} />
+          </>
+        )}
+        {view.educational && (
+          <>
+            <div className="h-16" />
+            <EducationSummary data={data?.education} />
+          </>
+        )}
+        {view.certification && (
+          <>
+            <div className="h-16" />
+            <Certificate data={data?.certificate} />
+          </>
+        )}
+        {view.declaration && (
+          <>
+            <div className="h-16" />
+            <Declaration data={data?.declaration} />
+          </>
+        )}
       </div>
     </div>
   );
