@@ -9,11 +9,21 @@ import LanguageSummary from "../d1block/LanguageSummary";
 import Name from "../d1block/Name";
 import SkillsSummary from "../d1block/SkillsSummary";
 import WorkSummary from "../d1block/WorkSummary";
-
-function DesignTwo() {
+interface props {
+  data: {
+    declaration?: any;
+    education?: any;
+    language?: any;
+    personalinfo?: any;
+    prof?: any;
+    skills?: any;
+    certificate?: any;
+  };
+}
+function DesignTwo({ data }: props) {
   return (
     <div className="flex w-full bg-white rounded-lg">
-      {/* <div className="bg-green-800 text-white w-1/3 py-20 px-8 rounded-lg">
+      <div className="bg-purple-800 text-white w-1/3 py-20 px-8 rounded-lg">
         <div>
           <div className="avatar cursor-pointer  flex justify-center">
             <div className="w-44 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2 mx-auto">
@@ -21,23 +31,23 @@ function DesignTwo() {
             </div>
           </div>
         </div>
-        <ContactMe />
-        <SkillsSummary />
-        <LanguageSummary />
+        <ContactMe data={data?.personalinfo} />
+        <SkillsSummary data={data?.skills} />
+        <LanguageSummary data={data?.language} />
       </div>
       <div className=" w-2/3 py-20 px-8 rounded-lg">
-        <Name />
+        <Name data={data?.personalinfo} />
         <div className="h-20" />
-        <Intro />
+        <Intro data={data?.personalinfo} />
         <div className="h-10" />
-        <WorkSummary />
+        <WorkSummary data={data?.prof} />
         <div className="h-10" />
-        <EducationSummary />
+        <EducationSummary data={data?.education} />
         <div className="h-10" />
-        <Certificate />
+        <Certificate data={data?.certificate} />
         <div className="h-10" />
-        <Declaration />
-      </div> */}
+        <Declaration data={data?.declaration} />
+      </div>
     </div>
   );
 }

@@ -31,21 +31,24 @@ function DesignOne({ data }: props) {
             </div>
           </div>
         </div>
+        <div className="h-10" />
         <ContactMe data={data?.personalinfo} />
+        <div className="h-10" />
         <SkillsSummary data={data?.skills} />
+        <div className="h-10" />
         <LanguageSummary data={data?.language} />
       </div>
       <div className=" w-2/3 py-20 px-8 rounded-lg">
         <Name data={data?.personalinfo} />
         <div className="h-20" />
         <Intro data={data?.personalinfo} />
-        <div className="h-10" />
+        <div className="h-16" />
         <WorkSummary data={data?.prof} />
-        <div className="h-10" />
+        <div className="h-16" />
         <EducationSummary data={data?.education} />
-        <div className="h-10" />
+        <div className="h-16" />
         <Certificate data={data?.certificate} />
-        <div className="h-10" />
+        <div className="h-16" />
         <Declaration data={data?.declaration} />
       </div>
     </div>

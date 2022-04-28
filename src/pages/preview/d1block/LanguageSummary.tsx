@@ -1,13 +1,14 @@
 import React from "react";
+import PreviewWrapper from "../../../components/previewwrapper/PreviewWrapper";
 import StarRating from "../../../components/starrating/StarRating";
 interface props {
   data: any;
 }
 function LanguageSummary({ data }: props) {
   return (
-    <>
+    <PreviewWrapper path="language">
       {data && (
-        <div className="mt-10">
+        <div>
           <div className="text-2xl font-bold">Language</div>
           <div className="space-y-3 mt-3">
             {Object.entries(data).map((obj: any, i) => {
@@ -24,7 +25,7 @@ function LanguageSummary({ data }: props) {
           </div>
         </div>
       )}
-    </>
+    </PreviewWrapper>
   );
 }
 

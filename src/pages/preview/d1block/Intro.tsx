@@ -1,5 +1,6 @@
 /* eslint-disable no-mixed-operators */
 import React from "react";
+import PreviewWrapper from "../../../components/previewwrapper/PreviewWrapper";
 interface props {
   data: {
     bio?: string;
@@ -12,14 +13,14 @@ interface props {
 }
 function Intro({ data }: props) {
   return (
-    <>
+    <PreviewWrapper path="personal-info">
       {data && (
-        <div className="mt-6">
+        <div>
           <div className="text-3xl font-bold">Personal Profile</div>
           <div className="mt-3">{data?.bio}</div>
         </div>
       )}
-    </>
+    </PreviewWrapper>
   );
 }
 

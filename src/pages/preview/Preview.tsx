@@ -13,8 +13,8 @@ import FilterIcon from "../../assets/icons/FilterIcon";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth, dbref } from "../../firebase/firebase";
 import { child, get, ref } from "firebase/database";
+import Loader from "../../components/loader/Loader";
 function Preview() {
-  const [userUid, SetuserUid] = useState<string | undefined>("");
   const [preivewData, SetpreivewData] = useState<any>();
   const navigate = useNavigate();
   const location = useLocation();
@@ -34,8 +34,7 @@ function Preview() {
   ];
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
-      SetuserUid(user?.uid);
-      user !== null ? fetchdata(user.uid) : navigate("/");
+      user !== null ? fetchdata(user?.uid) : navigate("/");
     });
   }, []);
   const fetchdata = (id: any) => {
@@ -108,14 +107,17 @@ function Preview() {
               path="design1"
               element={<DesignOne data={preivewData !== null && preivewData} />}
             />
-            <Route path="design2" element={<DesignTwo />} />
+            <Route
+              path="design2"
+              element={<DesignTwo data={preivewData !== null && preivewData} />}
+            />
             <Route path="design3" element={<DesignThree />} />
             <Route path="design4" element={<DesignFour />} />
             <Route path="design5" element={<DesignFive />} />
           </Routes>
         </div>
       ) : (
-        "Loading"
+        <Loader />
       )}
       <div className="fixed bottom-10 right-10">
         <button className="btn gap-2 flex items-center">

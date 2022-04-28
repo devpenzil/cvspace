@@ -1,13 +1,14 @@
 import React from "react";
 import Square from "../../../assets/icons/Square";
+import PreviewWrapper from "../../../components/previewwrapper/PreviewWrapper";
 interface props {
   data?: any;
 }
 function WorkSummary({ data }: props) {
   return (
-    <>
+    <PreviewWrapper path="proffessional-experiance">
       {data && (
-        <div className="mt-6">
+        <div>
           <div className="text-3xl font-bold">Work Experience</div>
           <div className="mt-3 space-y-6">
             {Object.entries(data).map((obj: any, i) => {
@@ -29,7 +30,7 @@ function WorkSummary({ data }: props) {
           </div>
         </div>
       )}
-    </>
+    </PreviewWrapper>
   );
 }
 

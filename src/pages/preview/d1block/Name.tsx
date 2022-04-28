@@ -1,4 +1,5 @@
 import React from "react";
+import PreviewWrapper from "../../../components/previewwrapper/PreviewWrapper";
 interface props {
   data: {
     bio?: "";
@@ -11,10 +12,10 @@ interface props {
 }
 function Name({ data }: props) {
   return (
-    <>
+    <PreviewWrapper path="personal-info">
       {data && (
         <div>
-          <div className="text-4xl font-semibold mt-6">
+          <div className="text-4xl font-semibold">
             {data?.name !== "" ? data?.name : "Your Name"}
           </div>
 
@@ -24,7 +25,7 @@ function Name({ data }: props) {
           )}
         </div>
       )}
-    </>
+    </PreviewWrapper>
   );
 }
 
