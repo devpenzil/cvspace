@@ -8,14 +8,13 @@ import DesignTwo from "./blocks/DesignTwo";
 import DesignThree from "./blocks/DesignThree";
 import DesignFour from "./blocks/DesignFour";
 import DesignFive from "./blocks/DesignFive";
-import DownloadIcon from "../../assets/icons/DownloadIcon";
 import FilterIcon from "../../assets/icons/FilterIcon";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth, dbref } from "../../firebase/firebase";
 import { child, get, ref } from "firebase/database";
 import Loader from "../../components/loader/Loader";
 import { viewOptions } from "../../types/previewTypes";
-import ReactToPdf from "react-to-pdf";
+import PrintIcon from "../../assets/icons/PrintIcon";
 function Preview() {
   const [preivewData, SetpreivewData] = useState<any>();
   const navigate = useNavigate();
@@ -60,16 +59,9 @@ function Preview() {
         console.error(error);
       });
   };
-  const refer: any = React.createRef();
-  const pdfoptions = {
-    orientation: "portrait",
-    unit: "mm",
-    format: [210, 297],
-    compress: true,
-  };
   return (
     <div className="container mx-auto bg-white rounded-md p-6">
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center print:hidden">
         <div className="text-sm breadcrumbs">
           <ul>
             <li>Home</li>
@@ -95,7 +87,7 @@ function Preview() {
           </div>
         </div>
       </div>
-      <div className="flex  justify-center items-center space-x-4 overflow-x-auto px-3">
+      <div className="flex  justify-center items-center space-x-4 overflow-x-auto px-3 print:hidden">
         {routes.map((obj, i) => {
           return (
             <button
@@ -114,7 +106,10 @@ function Preview() {
         })}
       </div>
       {preivewData ? (
-        <div className="mt-12 bg-slate-600 p-2 rounded-lg" ref={refer}>
+        <div
+          className="mt-12 bg-slate-600 p-5 print:p-0 rounded-lg"
+          id="print-area"
+        >
           <Routes>
             <Route
               path=""
@@ -152,17 +147,14 @@ function Preview() {
         <Loader />
       )}
       <div className="fixed bottom-10 right-10">
-        <ReactToPdf
-          targetRef={refer}
-          filename="resume.pdf"
-          options={pdfoptions}
+        <button
+          className="btn gap-2 flex items-center print:hidden"
+          onClick={() => {
+            window?.print();
+          }}
         >
-          {({ toPdf }: any) => (
-            <button className="btn gap-2 flex items-center" onClick={toPdf}>
-              Download <DownloadIcon />
-            </button>
-          )}
-        </ReactToPdf>
+          Print <PrintIcon />
+        </button>
       </div>
       <div>
         <input type="checkbox" id="preview-options" className="modal-toggle" />

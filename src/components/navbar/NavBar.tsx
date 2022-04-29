@@ -28,7 +28,10 @@ function NavBar() {
 
   return (
     <div
-      className={"w-full py-4 top-0 " + (location.pathname === "/" && "sticky")}
+      className={
+        "w-full py-4 top-0 print:hidden " +
+        (location.pathname === "/" && "sticky")
+      }
     >
       <div className="  px-4 py-3 rounded-md flex justify-between items-center bg-white mx-auto container nav">
         <div>

@@ -39,7 +39,7 @@ function DesignTwo({ data, view }: props) {
         </div>
       </div>
       <div className="mt-10 flex justify-around text-white">
-        <div className="w-[45%] px-8">
+        <div className="w-[45%] px-8 print:px-0">
           <Intro data={data?.personalinfo} />
           {view.skill && (
             <>
@@ -57,7 +57,7 @@ function DesignTwo({ data, view }: props) {
           <ContactMe data={data?.personalinfo} />
         </div>
 
-        <div className="w-[45%] px-8">
+        <div className="w-[45%] px-8 print:px-0">
           {view.educational && (
             <>
               <EducationSummary data={data?.education} />
