@@ -15,6 +15,7 @@ import { auth, dbref } from "../../firebase/firebase";
 import { child, get, ref } from "firebase/database";
 import Loader from "../../components/loader/Loader";
 import { viewOptions } from "../../types/previewTypes";
+import ReactToPdf from "react-to-pdf";
 function Preview() {
   const [preivewData, SetpreivewData] = useState<any>();
   const navigate = useNavigate();
@@ -59,7 +60,13 @@ function Preview() {
         console.error(error);
       });
   };
-  const printPdf = () => {};
+  const refer: any = React.createRef();
+  const pdfoptions = {
+    orientation: "portrait",
+    unit: "mm",
+    format: [210, 297],
+    compress: true,
+  };
   return (
     <div className="container mx-auto bg-white rounded-md p-6">
       <div className="flex justify-between items-center">
@@ -107,7 +114,7 @@ function Preview() {
         })}
       </div>
       {preivewData ? (
-        <div className="mt-12 bg-slate-600 p-5 rounded-lg">
+        <div className="mt-12 bg-slate-600 p-2 rounded-lg" ref={refer}>
           <Routes>
             <Route
               path=""
@@ -145,9 +152,17 @@ function Preview() {
         <Loader />
       )}
       <div className="fixed bottom-10 right-10">
-        <button className="btn gap-2 flex items-center" onClick={printPdf}>
-          Download <DownloadIcon />
-        </button>
+        <ReactToPdf
+          targetRef={refer}
+          filename="resume.pdf"
+          options={pdfoptions}
+        >
+          {({ toPdf }: any) => (
+            <button className="btn gap-2 flex items-center" onClick={toPdf}>
+              Download <DownloadIcon />
+            </button>
+          )}
+        </ReactToPdf>
       </div>
       <div>
         <input type="checkbox" id="preview-options" className="modal-toggle" />
