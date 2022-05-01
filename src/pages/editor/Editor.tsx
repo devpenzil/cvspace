@@ -71,7 +71,7 @@ function Editor() {
 
   return (
     <>
-      <div className="container mx-auto bg-white rounded-md p-6 ">
+      <div className="container mx-auto bg-white rounded-md md:p-6 p-4 ">
         <div className="flex justify-between items-center">
           <div className="text-sm breadcrumbs">
             <ul>
@@ -95,7 +95,7 @@ function Editor() {
           </div>
           <div>
             <div
-              className="flex cursor-pointer items-center"
+              className=" cursor-pointer items-center hidden md:flex"
               onClick={() => navigate("/preview/design1")}
             >
               Preview <EyeIcon />
@@ -103,8 +103,41 @@ function Editor() {
           </div>
         </div>
 
-        <div className="flex mt-3">
-          <div className="w-96">
+        <div className="flex md:flex-row flex-col mt-3 ">
+          <div>
+            <div>
+              <input
+                type="checkbox"
+                id="route-modal"
+                className="modal-toggle"
+              />
+              <div className="modal">
+                <div className="modal-box">
+                  <ul className="menu bg-base-100 w-full">
+                    {routes.map((obj, i) => {
+                      return (
+                        <label htmlFor="route-modal" className="">
+                          <li
+                            className={obj.active ? "bordered" : " "}
+                            key={i}
+                            onClick={() => {
+                              navigate(obj.route);
+                            }}
+                          >
+                            <a>
+                              {obj.icon} {obj.name}
+                            </a>
+                          </li>
+                        </label>
+                      );
+                    })}
+                  </ul>
+                  <div className="modal-action"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="w-96 hidden md:block">
             <ul className="menu bg-base-100 w-full">
               {routes.map((obj, i) => {
                 return (

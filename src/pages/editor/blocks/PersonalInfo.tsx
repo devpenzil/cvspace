@@ -80,8 +80,8 @@ function PersonalInfo() {
   return (
     <div className="container mx-auto">
       <ElementHeader title="Personal Info" />
-      <div className="w-full flex justify-around">
-        <div className="w-1/2 lg:w-1/3 pt-6 ">
+      <div className="w-full flex flex-col md:flex-row justify-center md:justify-around">
+        <div className="md:w-1/2  lg:w-1/3 pt-6 ">
           <div>
             <div className="avatar cursor-pointer  flex justify-center">
               <div className="w-44 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2 mx-auto">
@@ -89,6 +89,7 @@ function PersonalInfo() {
               </div>
             </div>
           </div>
+
           <AppInput
             label="Name"
             triggerchange={(e) => {
@@ -122,7 +123,7 @@ function PersonalInfo() {
             loading={isLoading}
           />
         </div>
-        <div className="w-1/3">
+        <div className="md:w-1/2  lg:w-1/3 ">
           <AppInput
             label="Job Title"
             triggerchange={(e) => {

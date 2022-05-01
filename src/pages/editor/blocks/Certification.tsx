@@ -148,8 +148,8 @@ function Certification() {
   return (
     <div className="container mx-auto">
       <ElementHeader title="Certifications" />
-      <div className="w-full flex justify-around">
-        <div className="w-1/3 pt-6 ">
+      <div className="w-full flex flex-col md:flex-row justify-around">
+        <div className="md:w-1/2  lg:w-1/3 pt-6 ">
           <AppInput
             label="Certificate Name"
             triggerchange={(e) => {
@@ -204,7 +204,7 @@ function Certification() {
             />
           )}
         </div>
-        <div className="w-1/3">
+        <div className="md:w-1/2  lg:w-1/3">
           {qdata?.length === 0 || (qdata === undefined && <EmptyBlock />)}
           {qdata !== null &&
             qdata?.map((obj: any, i: any) => {

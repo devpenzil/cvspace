@@ -1,5 +1,4 @@
 import "./Home.scss";
-import ss from "../../assets/screenshot.png";
 import {
   signInWithPopup,
   GoogleAuthProvider,
@@ -30,11 +29,11 @@ function Home() {
     <div className="min-h-screen w-full py-20">
       <div className="h-10" />
       <div className="container mx-auto">
-        <div className="text-center text-8xl font-bold">
+        <div className="text-center md:text-8xl text-3xl font-bold">
           The easiest way to create a
         </div>
-        <div className="text-center text-8xl font-bold">Resume</div>
-        <div className="mt-10 text-center">
+        <div className="text-center md:text-8xl text-3xl font-bold">Resume</div>
+        <div className="mt-10 text-center w-1/2 mx-auto">
           Our simple editor allows you to create beutifull resume in minutes.
         </div>
         <div className="text-center mt-12">

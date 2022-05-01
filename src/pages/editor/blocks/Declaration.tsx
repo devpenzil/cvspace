@@ -63,7 +63,7 @@ function Declaration() {
     <div className="container mx-auto">
       <ElementHeader title="Declaration" value={declaration.showinprint} />
       <div className="w-full flex justify-around">
-        <div className="w-1/2 pt-6 ">
+        <div className="w-full md:w-1/2  pt-6 ">
           <AppTextArea
             label="Declaration"
             loading={loading}

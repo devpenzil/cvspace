@@ -5,10 +5,7 @@ interface props {
 }
 function ElementHeader({ title, value }: props) {
   return (
-    <div
-      className="text-2xl font-bold flex items-center space-x-3 tooltip w-fit"
-      data-tip="Enable the toggle for add this section in the resume"
-    >
+    <div className="text-2xl font-bold flex items-center space-x-3  w-fit">
       <span>{title}</span>
     </div>
   );
