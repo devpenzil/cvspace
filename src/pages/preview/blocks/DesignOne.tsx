@@ -1,5 +1,7 @@
-import React from "react";
+import { getDownloadURL, ref as bucketref } from "firebase/storage";
+import React, { useEffect, useState } from "react";
 import userPlaceholder from "../../../assets/placeholder.png";
+import { bucket } from "../../../firebase/firebase";
 import { viewOptions } from "../../../types/previewTypes";
 import Certificate from "../d1block/Certificate";
 import ContactMe from "../d1block/ContactMe";
@@ -10,6 +12,7 @@ import LanguageSummary from "../d1block/LanguageSummary";
 import Name from "../d1block/Name";
 import SkillsSummary from "../d1block/SkillsSummary";
 import WorkSummary from "../d1block/WorkSummary";
+
 interface props {
   data: {
     declaration?: any;
@@ -21,15 +24,31 @@ interface props {
     certificate?: any;
   };
   view: viewOptions;
+  userUid?: string | undefined;
 }
-function DesignOne({ data, view }: props) {
+function DesignOne({ data, view, userUid }: props) {
+  const [profilepic, SetProfilePic] = useState<string | undefined>(
+    userPlaceholder
+  );
+  useEffect(() => {
+    fetcImg();
+  });
+  const fetcImg = () => {
+    getDownloadURL(bucketref(bucket, userUid))
+      .then((url: any) => {
+        SetProfilePic(url);
+      })
+      .catch((Error) => {
+        console.log(Error);
+      });
+  };
   return (
     <div className="flex w-full bg-white rounded-lg outline-none">
       <div className="bg-sky-800 text-white w-1/3 py-20 px-8 rounded-lg">
         <div>
           <div className="avatar cursor-pointer  flex justify-center">
             <div className="w-44 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2 mx-auto">
-              <img src={userPlaceholder} className="mx-auto" alt="user" />
+              <img src={profilepic} className="mx-auto" alt="user" />
             </div>
           </div>
         </div>

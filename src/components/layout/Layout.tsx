@@ -16,7 +16,7 @@ function Layout({ children }: any) {
         <ToastContainer newestOnTop />
         <label
           htmlFor="helpui"
-          className="btn modal-button btn-circle fixed bottom-10 left-10 print:hidden"
+          className="btn modal-button btn-circle fixed md:bottom-10 md:left-10 bottom-5 left-5 print:hidden"
         >
           <InfoIcon />
         </label>

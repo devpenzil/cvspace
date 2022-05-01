@@ -41,9 +41,11 @@ function Preview() {
     language: true,
     declaration: true,
   });
+  const [userUid, SetuserUid] = useState<undefined | string>("");
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       user !== null ? fetchdata(user?.uid) : navigate("/");
+      user !== null && SetuserUid(user.uid);
     });
   }, []);
   const fetchdata = (id: any) => {
@@ -117,6 +119,7 @@ function Preview() {
                 <DesignOne
                   data={preivewData !== null && preivewData}
                   view={viewoptions}
+                  userUid={userUid}
                 />
               }
             />
@@ -126,6 +129,7 @@ function Preview() {
                 <DesignOne
                   data={preivewData !== null && preivewData}
                   view={viewoptions}
+                  userUid={userUid}
                 />
               }
             />

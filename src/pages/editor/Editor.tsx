@@ -116,10 +116,9 @@ function Editor() {
                   <ul className="menu bg-base-100 w-full">
                     {routes.map((obj, i) => {
                       return (
-                        <label htmlFor="route-modal" className="">
+                        <label htmlFor="route-modal" className="" key={i}>
                           <li
                             className={obj.active ? "bordered" : " "}
-                            key={i}
                             onClick={() => {
                               navigate(obj.route);
                             }}
