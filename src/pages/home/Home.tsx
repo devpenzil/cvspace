@@ -54,9 +54,7 @@ function Home() {
             </button>
           )}
         </div>
-        <div className="mt-20 px-20">
-          <img src={ss} alt="" />
-        </div>
+        <div className="mt-20 flex justify-center"></div>
       </div>
     </div>
   );

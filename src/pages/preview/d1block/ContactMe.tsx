@@ -20,18 +20,27 @@ function ContactMe({ data }: props) {
         <div className="text-2xl font-bold">Contact Me</div>
         <div className="mt-3 space-y-3">
           {data?.phone !== "" && (
-            <div className="flex items-center space-x-4">
-              <PhoneIcon /> <span>9626987569</span>
+            <div className="flex items-center space-x-4 print:space-x-1">
+              <div className="print:hidden">
+                <PhoneIcon />
+              </div>{" "}
+              <span>9626987569</span>
             </div>
           )}
           {data?.email !== "" && (
-            <div className="flex items-center space-x-4">
-              <MailIcon /> <span>ajoalex012@gmail.com</span>
+            <div className="flex items-center space-x-4 print:space-x-1">
+              <div className="print:hidden">
+                <MailIcon />
+              </div>{" "}
+              <span>ajoalex012@gmail.com</span>
             </div>
           )}
           {data?.website !== "" && (
-            <div className="flex items-center space-x-4">
-              <GlobeIcon /> <span>devpenzil.dev</span>
+            <div className="flex items-center space-x-4 print:space-x-1">
+              <div className="print:hidden">
+                <GlobeIcon />
+              </div>{" "}
+              <span>devpenzil.dev</span>
             </div>
           )}
         </div>

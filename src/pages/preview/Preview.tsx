@@ -27,11 +27,11 @@ function Preview() {
         location.pathname === "/preview/design1" ||
         location.pathname === "/preview",
     },
-    {
-      name: "Design 2",
-      route: "design2",
-      active: location.pathname === "/preview/design2",
-    },
+    // {
+    //   name: "Design 2",
+    //   route: "design2",
+    //   active: location.pathname === "/preview/design2",
+    // },
   ];
   const [viewoptions, SetSetViewoptions] = useState<viewOptions>({
     educational: true,
@@ -107,7 +107,7 @@ function Preview() {
       </div>
       {preivewData ? (
         <div
-          className="mt-12 bg-slate-600 p-5 print:p-0 rounded-lg"
+          className="mt-12 print:mt-0 bg-slate-600 p-5 print:p-0 rounded-lg"
           id="print-area"
         >
           <Routes>

@@ -17,7 +17,7 @@ function LanguageSummary({ data }: props) {
                   className="flex items-center justify-between flex-wrap"
                   key={i}
                 >
-                  <div>{obj[1].language}</div>
+                  <div className="print:w-full">{obj[1].language}</div>
                   <StarRating value={obj[1].rate} />
                 </div>
               );

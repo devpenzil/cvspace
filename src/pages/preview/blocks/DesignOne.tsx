@@ -24,7 +24,7 @@ interface props {
 }
 function DesignOne({ data, view }: props) {
   return (
-    <div className="flex w-full bg-white rounded-lg">
+    <div className="flex w-full bg-white rounded-lg outline-none">
       <div className="bg-sky-800 text-white w-1/3 py-20 px-8 rounded-lg">
         <div>
           <div className="avatar cursor-pointer  flex justify-center">
