@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import PenIcons from "../../assets/icons/PenIcons";
@@ -15,6 +16,9 @@ import { child, get, ref } from "firebase/database";
 import Loader from "../../components/loader/Loader";
 import { viewOptions } from "../../types/previewTypes";
 import PrintIcon from "../../assets/icons/PrintIcon";
+import { colors } from "../../types/editorTypes";
+import PaintIcon from "../../assets/icons/PaintIcon";
+import PrintOptions from "../../components/print-options/PrintOptions";
 function Preview() {
   const [preivewData, SetpreivewData] = useState<any>();
   const navigate = useNavigate();
@@ -33,6 +37,12 @@ function Preview() {
     //   active: location.pathname === "/preview/design2",
     // },
   ];
+  const [printColor, SetPrintColor] = useState<colors>({
+    primarybg: "#fff",
+    secondarybg: "#075985",
+    primarytext: "#000",
+    secondarytext: "#fff",
+  });
   const [viewoptions, SetSetViewoptions] = useState<viewOptions>({
     educational: true,
     proff: true,
@@ -73,8 +83,16 @@ function Preview() {
         <div className="flex space-x-5">
           <div>
             <label
+              htmlFor="color-modal"
+              className=" modal-button btn btn-square btn-sm "
+            >
+              <PaintIcon />
+            </label>
+          </div>
+          <div>
+            <label
               htmlFor="preview-options"
-              className=" modal-button btn btn-circle btn-sm "
+              className=" modal-button btn btn-square btn-sm "
             >
               <FilterIcon />
             </label>
@@ -89,7 +107,7 @@ function Preview() {
           </div>
         </div>
       </div>
-      <div className="flex  justify-center items-center space-x-4 overflow-x-auto px-3 print:hidden">
+      {/* <div className="flex  justify-center items-center space-x-4 overflow-x-auto px-3 print:hidden">
         {routes.map((obj, i) => {
           return (
             <button
@@ -106,7 +124,7 @@ function Preview() {
             </button>
           );
         })}
-      </div>
+      </div> */}
       {preivewData ? (
         <div
           className="mt-12 print:mt-0 bg-slate-600 p-5 print:p-0 rounded-lg"
@@ -120,6 +138,7 @@ function Preview() {
                   data={preivewData !== null && preivewData}
                   view={viewoptions}
                   userUid={userUid}
+                  printcolor={printColor}
                 />
               }
             />
@@ -130,6 +149,7 @@ function Preview() {
                   data={preivewData !== null && preivewData}
                   view={viewoptions}
                   userUid={userUid}
+                  printcolor={printColor}
                 />
               }
             />
@@ -160,6 +180,21 @@ function Preview() {
           Print <PrintIcon />
         </button>
       </div>
+      <PrintOptions
+        value={printColor}
+        changepbg={(e) => {
+          SetPrintColor({ ...printColor, primarybg: e });
+        }}
+        changepsbg={(e) => {
+          SetPrintColor({ ...printColor, secondarybg: e });
+        }}
+        changeptx={(e) => {
+          SetPrintColor({ ...printColor, primarytext: e });
+        }}
+        changestx={(e) => {
+          SetPrintColor({ ...printColor, secondarytext: e });
+        }}
+      />
       <div>
         <input type="checkbox" id="preview-options" className="modal-toggle" />
         <div className="modal">
@@ -265,6 +300,7 @@ function Preview() {
                 </label>
               </div>
             </div>
+
             <div className="modal-action">
               <label htmlFor="preview-options" className="btn btn-primary">
                 close

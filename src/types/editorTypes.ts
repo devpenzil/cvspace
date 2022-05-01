@@ -31,3 +31,9 @@ export interface SingleLanguage {
   rate: string | undefined;
   id?: string | undefined;
 }
+export interface colors {
+  primarybg: string;
+  secondarybg: string;
+  primarytext: string;
+  secondarytext: string;
+}

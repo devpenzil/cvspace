@@ -2,6 +2,7 @@ import { getDownloadURL, ref as bucketref } from "firebase/storage";
 import React, { useEffect, useState } from "react";
 import userPlaceholder from "../../../assets/placeholder.png";
 import { bucket } from "../../../firebase/firebase";
+import { colors } from "../../../types/editorTypes";
 import { viewOptions } from "../../../types/previewTypes";
 import Certificate from "../d1block/Certificate";
 import ContactMe from "../d1block/ContactMe";
@@ -25,8 +26,9 @@ interface props {
   };
   view: viewOptions;
   userUid?: string | undefined;
+  printcolor?: colors;
 }
-function DesignOne({ data, view, userUid }: props) {
+function DesignOne({ data, view, userUid, printcolor }: props) {
   const [profilepic, SetProfilePic] = useState<string | undefined>(
     userPlaceholder
   );
@@ -43,8 +45,20 @@ function DesignOne({ data, view, userUid }: props) {
       });
   };
   return (
-    <div className="flex w-full bg-white rounded-lg outline-none">
-      <div className="bg-sky-800 text-white w-1/3 py-20 px-8 rounded-lg">
+    <div
+      className="flex w-full bg-white rounded-lg outline-none"
+      style={{
+        backgroundColor: printcolor?.primarybg,
+        color: printcolor?.primarytext,
+      }}
+    >
+      <div
+        className=" text-white w-1/3 py-20 px-8 rounded-lg"
+        style={{
+          backgroundColor: printcolor?.secondarybg,
+          color: printcolor?.secondarytext,
+        }}
+      >
         <div>
           <div className="avatar cursor-pointer  flex justify-center">
             <div className="w-44 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2 mx-auto">

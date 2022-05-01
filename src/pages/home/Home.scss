@@ -5,17 +5,3 @@
     radial-gradient(70.41% 100% at 50% 0%, #2cd9ff 0%, #d9dee6 100%);
   background-blend-mode: soft-light, difference, difference, normal;
 }
-input[type="color"] {
-  -webkit-appearance: none;
-  border: none;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  overflow: hidden;
-}
-input[type="color"]::-webkit-color-swatch-wrapper {
-  padding: 0;
-}
-input[type="color"]::-webkit-color-swatch {
-  border: none;
-}
