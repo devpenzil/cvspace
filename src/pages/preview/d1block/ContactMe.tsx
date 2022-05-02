@@ -14,6 +14,8 @@ interface props {
   };
 }
 function ContactMe({ data }: props) {
+  console.log(data);
+
   return (
     <PreviewWrapper path="personal-info">
       <div>
@@ -24,7 +26,7 @@ function ContactMe({ data }: props) {
               <div className="print:hidden">
                 <PhoneIcon />
               </div>{" "}
-              <span>9626987569</span>
+              <span>{data.phone}</span>
             </div>
           )}
           {data?.email !== "" && (
@@ -32,7 +34,7 @@ function ContactMe({ data }: props) {
               <div className="print:hidden">
                 <MailIcon />
               </div>{" "}
-              <span>ajoalex012@gmail.com</span>
+              <span>{data.email}</span>
             </div>
           )}
           {data?.website !== "" && (
@@ -40,7 +42,7 @@ function ContactMe({ data }: props) {
               <div className="print:hidden">
                 <GlobeIcon />
               </div>{" "}
-              <span>devpenzil.dev</span>
+              <span>{data.website}</span>
             </div>
           )}
         </div>
