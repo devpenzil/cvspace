@@ -5,3 +5,9 @@
     radial-gradient(70.41% 100% at 50% 0%, #2cd9ff 0%, #d9dee6 100%);
   background-blend-mode: soft-light, difference, difference, normal;
 }
+
+@media print {
+  .Home {
+    background: #fff;
+  }
+}
