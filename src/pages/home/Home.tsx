@@ -54,7 +54,23 @@ function Home() {
             </button>
           )}
         </div>
-        <div className="mt-20 md:p-20 p-5">
+        <div className="flex justify-center pt-10">
+          <a
+            href="https://www.producthunt.com/posts/cvspace?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-cvspace"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <img
+              src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=345167&theme=light"
+              alt="cvspace - Create your Resume without any struggle | Product Hunt"
+              style={{ width: 250, height: 54 }}
+              width={250}
+              height={54}
+            />
+          </a>
+        </div>
+
+        <div className="mt-5 md:p-20 p-5">
           <img src={ss} alt="hero" />
         </div>
       </div>
