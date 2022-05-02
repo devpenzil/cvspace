@@ -9,6 +9,7 @@ function HelpUI() {
     "Print the resume with the print button at the bottom left.",
     "Remove unwanted section from the print by using the filter icon on the preview page.",
     "Drag and change the position of the sections in the preview page.",
+    "If you are on a mobile device, you can't preview or print your resume. But still can edit the details.",
   ];
   return (
     <div>

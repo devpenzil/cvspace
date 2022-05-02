@@ -10,6 +10,7 @@ function App() {
       <Layout>
         <Routes>
           <Route element={<Home />} path="/" />
+          <Route element={<Home />} path="/?ref=producthunt" />
           <Route element={<Editor />} path="/editor/*" />
           <Route element={<Preview />} path="/preview/*" />
         </Routes>
