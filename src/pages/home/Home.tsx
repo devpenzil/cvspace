@@ -8,6 +8,7 @@ import { auth } from "../../firebase/firebase";
 import { toast } from "react-toastify";
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import ss from "../../assets/ss.png";
 function Home() {
   const navigation = useNavigate();
   const [userData, Setuserdata] = useState<any>(null);
@@ -53,7 +54,9 @@ function Home() {
             </button>
           )}
         </div>
-        <div className="mt-20 flex justify-center"></div>
+        <div className="mt-20 md:p-20 p-5">
+          <img src={ss} alt="hero" />
+        </div>
       </div>
     </div>
   );
