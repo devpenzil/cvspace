@@ -1,3 +1,5 @@
 [[redirects]]
   from = "/editor"
   to = "/editor"
+  status = 200
+  force = true
